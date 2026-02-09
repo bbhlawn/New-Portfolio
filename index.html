@@ -157,9 +157,58 @@
         }
         .contact-icon-btn:active { transform: scale(0.95); opacity: 0.9; }
         .contact-icon-btn svg { width: 20px; height: 20px; }
+
+        /* Dynamic Island Notification */
+        .dynamic-island {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            background: #000;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 999px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: fit-content;
+            min-width: 120px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            pointer-events: none;
+        }
+        .dynamic-island.show {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .dynamic-island.expanded {
+            width: calc(100% - 32px);
+            max-width: 380px;
+            border-radius: 32px;
+            padding: 16px 20px;
+        }
     </style>
 </head>
 <body class="bg-[#F2F2F7] min-h-screen">
+    <!-- Dynamic Island Notification -->
+    <div id="dynamic-island" class="dynamic-island">
+        <div class="flex items-center gap-3 w-full">
+            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                <span class="text-sm">🏗️</span>
+            </div>
+            <div id="island-content" class="flex-grow overflow-hidden opacity-0 transition-opacity duration-300">
+                <p class="text-[14px] font-medium leading-tight">Live Construction</p>
+                <p class="text-[11px] opacity-60 font-light">Refining the experience daily...</p>
+            </div>
+            <button onclick="dismissIsland()" class="opacity-0 transition-opacity duration-300 ml-2" id="island-close">
+                <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+    </div>
+
     <div class="max-w-md mx-auto px-6 pt-12 pb-24 relative min-h-screen">
         <!-- Back Button -->
         <button id="back-btn" class="back-button fixed top-12 left-6 z-[110] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm text-black font-medium text-sm flex items-center space-x-1" onclick="resetCards()">
@@ -758,6 +807,33 @@
             stack.style.transform = 'translateY(0)';
             stack.style.marginTop = "0";
         }
+
+        // Dynamic Island Animation Logic
+        function triggerIsland() {
+            const island = document.getElementById('dynamic-island');
+            const content = document.getElementById('island-content');
+            const closeBtn = document.getElementById('island-close');
+
+            setTimeout(() => {
+                island.classList.add('show');
+                
+                setTimeout(() => {
+                    island.classList.add('expanded');
+                    setTimeout(() => {
+                        content.style.opacity = '1';
+                        closeBtn.style.opacity = '1';
+                    }, 300);
+                }, 800);
+            }, 1000);
+        }
+
+        function dismissIsland() {
+            const island = document.getElementById('dynamic-island');
+            island.style.transform = 'translateX(-50%) translateY(-100px) scale(0.5)';
+            island.style.opacity = '0';
+        }
+
+        window.addEventListener('load', triggerIsland);
     </script>
 </body>
 </html>
