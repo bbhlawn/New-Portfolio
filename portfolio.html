@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apple Wallet Portfolio - Ticket Edition</title>
+    <title>Portfolio - Hlawn</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
@@ -101,6 +101,14 @@
             letter-spacing: 0.05em;
         }
 
+        .label-slim {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+            font-weight: 400;
+        }
+
         /* Dropdown Styles */
         .profile-dropdown {
             position: absolute;
@@ -163,10 +171,10 @@
 
         <!-- Header -->
         <header id="header" class="flex justify-between items-start mb-10 transition-all duration-500 relative z-[150]">
-            <div>
+            <a href="index.html" class="block">
                 <p id="current-date" class="label-slim mb-1" style="opacity: 0.4;">FRIDAY, JAN 30</p>
-                <h1 class="text-3xl font-normal text-black tracking-tight">Hey, <span class="font-medium">I'm Hlawn!</span></h1>
-            </div>
+                <h1 class="text-3xl font-normal text-black tracking-tight">Portfolio</h1>
+            </a>
             <div class="relative">
                 <div class="w-12 h-12 rounded-full overflow-hidden bg-white border border-gray-100 shadow-sm flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-300" onclick="toggleDropdown(event)">
                     <img src="assets/Hlawn_photo-74a90dc0-762d-4222-896d-eb83c4d43b3e.png" alt="Profile" class="w-full h-full object-cover">
@@ -188,19 +196,12 @@
             </div>
         </header>
 
-        <!-- Section Title -->
-        <div id="section-title" class="flex justify-between items-center mb-6 transition-all duration-500">
-            <h2 class="text-lg font-medium text-black opacity-80">Portfolio</h2>
-            <a href="portfolio.html" class="text-[#007AFF] text-[15px] font-normal">Show More</a>
-        </div>
-
         <!-- Wallet Stack Container -->
         <div id="card-stack" class="relative flex flex-col space-y-[-380px] transition-all duration-500 mb-12">
             
             <!-- Card 1: ARFI -->
             <div class="wallet-card min-h-[460px] rounded-[28px] bg-[#1E2E3D] p-7 text-white card-shadow z-10 flex flex-col justify-between overflow-hidden" onclick="expandCard(this)">
                 <div>
-                    <!-- Top Section -->
                     <div class="flex justify-between items-start mb-8">
                         <div>
                             <h3 class="text-lg font-medium tracking-tight opacity-95">ARFI</h3>
@@ -214,14 +215,11 @@
                                 <p class="label-slim">Role</p>
                                 <p class="text-lg font-light tracking-tight">Lead</p>
                             </div>
-                            <!-- Logo Placeholder -->
                             <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden">
                                 <img src="assets/arfi-logo-9d6c93c3-1ea3-4b61-9fe3-d1deb1ae4083.png" alt="ARFI Logo" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
-
-                    <!-- Middle Section -->
                     <div class="flex justify-between items-center mb-10 px-2">
                         <div class="text-center">
                             <p class="label-slim mb-1">From</p>
@@ -243,8 +241,6 @@
                             <p class="text-[10px] font-normal opacity-30 mt-1 uppercase tracking-[0.1em]">Feb 2026</p>
                         </div>
                     </div>
-
-                    <!-- Details/Scope Section (Visible when expanded) -->
                     <div class="details-pane">
                         <div class="space-y-6 pt-4 border-t border-white/5">
                             <div class="flex justify-between">
@@ -269,10 +265,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Footer Section -->
                 <div class="perforation mt-6 mb-6 opacity-60"></div>
-                
                 <div class="flex justify-between items-center">
                     <div>
                         <p class="label-slim mb-0.5 opacity-20">Partner</p>
@@ -306,7 +299,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="flex justify-between items-center mb-10 px-2">
                         <div class="text-center">
                             <p class="label-slim mb-1">From</p>
@@ -328,7 +320,6 @@
                             <p class="text-[10px] font-normal opacity-30 mt-1 uppercase tracking-[0.1em]">Present</p>
                         </div>
                     </div>
-
                     <div class="details-pane">
                         <div class="space-y-6 pt-4 border-t border-white/5">
                             <div class="flex justify-between">
@@ -353,9 +344,7 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="perforation mt-6 mb-6 opacity-60"></div>
-                
                 <div class="flex justify-between items-center">
                     <div>
                         <p class="label-slim mb-0.5 opacity-20">Client</p>
@@ -389,7 +378,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="flex justify-between items-center mb-10 px-2">
                         <div class="text-center">
                             <p class="label-slim mb-1">From</p>
@@ -411,7 +399,6 @@
                             <p class="text-[10px] font-normal opacity-30 mt-1 uppercase tracking-[0.1em]">2024</p>
                         </div>
                     </div>
-
                     <div class="details-pane">
                         <div class="space-y-6 pt-4 border-t border-white/5">
                             <div class="flex justify-between">
@@ -436,9 +423,7 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="perforation mt-6 mb-6 opacity-60"></div>
-                
                 <div class="flex justify-between items-center">
                     <div>
                         <p class="label-slim mb-0.5 opacity-20">Client</p>
@@ -450,161 +435,164 @@
                     </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Latest Activity (Resume Section) -->
-        <div id="latest-activity" class="transition-all duration-500 mb-8">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-medium text-black opacity-80">Latest Activity</h2>
-                <button class="text-[#007AFF] text-[15px] font-normal">Show More</button>
-            </div>
-            
-            <div class="bg-white rounded-[24px] overflow-hidden shadow-sm border border-gray-100">
-                <!-- Activity Item 1 -->
-                <div class="flex items-center p-4 border-b border-gray-50 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-white flex-shrink-0 flex items-center justify-center overflow-hidden mr-4 border border-gray-100">
-                        <img src="assets/image-1dc688ad-bca0-4537-8e78-bc7cd6d0d168.png" alt="Stanford GSB" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">Graduate Researcher</h3>
+            <!-- Card 4: STEALTH -->
+            <div class="wallet-card min-h-[460px] rounded-[28px] bg-[#4A1E1E] p-7 text-white card-shadow z-40 flex flex-col justify-between overflow-hidden" onclick="expandCard(this)">
+                <div>
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h3 class="text-xl font-medium tracking-tight opacity-95">STEALTH</h3>
                         </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">Stanford GSB Behavioral Lab</p>
-                            <p class="text-[12px] text-gray-400 font-light">Jun 2024 - Present</p>
+                        <div class="flex space-x-6 text-right">
+                            <div>
+                                <p class="label-slim">Duration</p>
+                                <p class="text-lg font-light tracking-tight">8 <span class="text-xs opacity-50">mo</span></p>
+                            </div>
+                            <div>
+                                <p class="label-slim">Role</p>
+                                <p class="text-lg font-light tracking-tight">Lead</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white/5">
+                                <span class="text-xl">🚀</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-10 px-2">
+                        <div class="text-center">
+                            <p class="label-slim mb-1">From</p>
+                            <h4 class="text-6xl font-extralight tracking-tighter uppercase">IDEA</h4>
+                            <p class="text-[10px] font-normal opacity-30 mt-1 uppercase tracking-[0.1em]">2022</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-grow">
+                            <div class="flex items-center w-full px-6 mb-3">
+                                <div class="h-[0.5px] bg-white/10 flex-grow"></div>
+                                <div class="w-1 h-1 rounded-full bg-white/20 mx-2"></div>
+                                <div class="h-[0.5px] bg-white/10 flex-grow"></div>
+                            </div>
+                            <p class="label-slim !text-[8px] opacity-20">Incubation</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="label-slim mb-1">To</p>
+                            <h4 class="text-6xl font-extralight tracking-tighter uppercase">BETA</h4>
+                            <p class="text-[10px] font-normal opacity-30 mt-1 uppercase tracking-[0.1em]">2023</p>
+                        </div>
+                    </div>
+                    <div class="details-pane">
+                        <div class="space-y-6 pt-4 border-t border-white/5">
+                            <div class="flex justify-between">
+                                <div>
+                                    <p class="label-slim mb-1">Scope</p>
+                                    <p class="text-lg font-light tracking-tight">Product Strategy</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="label-slim mb-1">Methods</p>
+                                    <p class="text-lg font-light tracking-tight">Design Sprints</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">Fintech</span>
+                                <span class="badge">MVPs</span>
+                                <span class="badge bg-white/5 text-white/70 ml-auto flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-orange-500/50"></span>
+                                    STEALTH
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Activity Item 2 -->
-                <div class="flex items-center p-4 border-b border-gray-50 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-white border border-gray-100 flex-shrink-0 flex items-center justify-center overflow-hidden mr-4">
-                        <img src="assets/image-8d67d610-7d5f-4eca-96d7-d6967a7263cf.png" alt="Stanford CIDR" class="w-full h-full object-cover">
+                <div class="perforation mt-6 mb-6 opacity-60"></div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="label-slim mb-0.5 opacity-20">Client</p>
+                        <p class="text-[15px] font-normal tracking-tight opacity-90">Confidential</p>
                     </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">Graduate Researcher</h3>
-                        </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">Stanford Center for Innovation and Design Research</p>
-                            <p class="text-[12px] text-gray-400 font-light">Sep 2023 - Jun 2024</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Activity Item 3 -->
-                <div class="flex items-center p-4 border-b border-gray-50 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-black flex-shrink-0 flex items-center justify-center overflow-hidden mr-4">
-                        <img src="assets/arfi-logo-9d6c93c3-1ea3-4b61-9fe3-d1deb1ae4083.png" alt="ARFI" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">Founder & Lead Designer</h3>
-                        </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">ARFI</p>
-                            <p class="text-[12px] text-gray-400 font-light">Dec 2023 - Feb 2026</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Activity Item 4 -->
-                <div class="flex items-center p-4 border-b border-gray-50 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-[#F2F2F7] flex-shrink-0 flex items-center justify-center overflow-hidden mr-4">
-                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=SS&backgroundColor=333333" alt="Work" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">Lead Designer</h3>
-                        </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">Stealth Startup</p>
-                            <p class="text-[12px] text-gray-400 font-light">Jan 2022 - Nov 2023</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Activity Item 5 -->
-                <div class="flex items-center p-4 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-white border border-gray-100 flex-shrink-0 flex items-center justify-center overflow-hidden mr-4">
-                        <img src="assets/image-30d48eca-e6f0-45a6-9bd9-1bf27d816034.png" alt="belif" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">User Researcher</h3>
-                        </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">belif</p>
-                            <p class="text-[12px] text-gray-400 font-light">Sep 2025 - Present</p>
-                        </div>
-                    </div>
+                    <button class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5">
+                        <span class="text-[11px] font-medium tracking-wide opacity-80">View Case</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Lifelong Achievements -->
-        <div id="lifelong-achievements" class="transition-all duration-500 pb-12">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-medium text-black opacity-80">Lifelong Achievements</h2>
-            </div>
-            
-            <div class="bg-white rounded-[24px] overflow-hidden shadow-sm border border-gray-100">
-                <!-- Achievement Item 1 -->
-                <div class="flex items-center p-4 border-b border-gray-50 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-[#FFF9C4] flex-shrink-0 flex items-center justify-center overflow-hidden mr-4">
-                        <span class="text-xl">🏆</span>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">Design Excellence Award</h3>
-                            <span class="text-[15px] font-medium text-black">Gold</span>
+            <!-- Card 5: GLOBAL -->
+            <div class="wallet-card min-h-[460px] rounded-[28px] bg-[#2C2C2E] p-7 text-white card-shadow z-50 flex flex-col justify-between overflow-hidden" onclick="expandCard(this)">
+                <div>
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h3 class="text-xl font-medium tracking-tight opacity-95">GLOBAL</h3>
                         </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">International Design Forum</p>
-                            <p class="text-[13px] text-gray-400 font-light">2025</p>
+                        <div class="flex space-x-6 text-right">
+                            <div>
+                                <p class="label-slim">Duration</p>
+                                <p class="text-lg font-light tracking-tight">12 <span class="text-xs opacity-50">mo</span></p>
+                            </div>
+                            <div>
+                                <p class="label-slim">Role</p>
+                                <p class="text-lg font-light tracking-tight">Lead</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white/5">
+                                <span class="text-xl">🌍</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mb-10 px-2">
+                        <div class="text-center">
+                            <p class="label-slim mb-1">From</p>
+                            <h4 class="text-6xl font-extralight tracking-tighter uppercase">LOC</h4>
+                            <p class="text-[10px] font-normal opacity-30 mt-1 uppercase tracking-[0.1em]">2021</p>
+                        </div>
+                        <div class="flex flex-col items-center flex-grow">
+                            <div class="flex items-center w-full px-6 mb-3">
+                                <div class="h-[0.5px] bg-white/10 flex-grow"></div>
+                                <div class="w-1 h-1 rounded-full bg-white/20 mx-2"></div>
+                                <div class="h-[0.5px] bg-white/10 flex-grow"></div>
+                            </div>
+                            <p class="label-slim !text-[8px] opacity-20">Scaling</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="label-slim mb-1">To</p>
+                            <h4 class="text-6xl font-extralight tracking-tighter uppercase">GLO</h4>
+                            <p class="text-[10px] font-normal opacity-30 mt-1 uppercase tracking-[0.1em]">2022</p>
+                        </div>
+                    </div>
+                    <div class="details-pane">
+                        <div class="space-y-6 pt-4 border-t border-white/5">
+                            <div class="flex justify-between">
+                                <div>
+                                    <p class="label-slim mb-1">Scope</p>
+                                    <p class="text-lg font-light tracking-tight">Operations</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="label-slim mb-1">Methods</p>
+                                    <p class="text-lg font-light tracking-tight">Service Design</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge">Sustainability</span>
+                                <span class="badge">Logistics</span>
+                                <span class="badge bg-white/5 text-white/70 ml-auto flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500/50"></span>
+                                    SCALED
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Achievement Item 2 -->
-                <div class="flex items-center p-4 border-b border-gray-50 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-[#E1F5FE] flex-shrink-0 flex items-center justify-center overflow-hidden mr-4">
-                        <span class="text-xl">🎓</span>
+                <div class="perforation mt-6 mb-6 opacity-60"></div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="label-slim mb-0.5 opacity-20">Partner</p>
+                        <p class="text-[15px] font-normal tracking-tight opacity-90">International NGO</p>
                     </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">Master of Interaction Design</h3>
-                            <span class="text-[15px] font-medium text-black">Honors</span>
-                        </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">Stanford University</p>
-                            <p class="text-[13px] text-gray-400 font-light">2023</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Achievement Item 3 -->
-                <div class="flex items-center p-4 active:bg-gray-50 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-[#F1F8E9] flex-shrink-0 flex items-center justify-center overflow-hidden mr-4">
-                        <span class="text-xl">🌟</span>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-[15px] font-medium text-black">Top 30 Under 30</h3>
-                            <span class="text-[15px] font-medium text-black">Featured</span>
-                        </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <p class="text-[13px] text-gray-400 font-light">Forbes Asia</p>
-                            <p class="text-[13px] text-gray-400 font-light">2022</p>
-                        </div>
-                    </div>
+                    <button class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5">
+                        <span class="text-[11px] font-medium tracking-wide opacity-80">View Case</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Set dynamic date
         function updateDate() {
             const dateElement = document.getElementById('current-date');
             const now = new Date();
@@ -618,7 +606,6 @@
             document.getElementById('profile-dropdown').classList.toggle('show');
         }
 
-        // Close dropdown when clicking outside
         window.onclick = function(event) {
             const dropdown = document.getElementById('profile-dropdown');
             if (dropdown.classList.contains('show')) {
@@ -629,22 +616,11 @@
         function expandCard(element) {
             const cards = document.querySelectorAll('.wallet-card');
             const header = document.getElementById('header');
-            const title = document.getElementById('section-title');
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
-            const activity = document.getElementById('latest-activity');
-            const achievements = document.getElementById('lifelong-achievements');
 
             if (element.classList.contains('active')) return;
 
-            // Get all cards and find the index of the clicked one
-            const cardsArray = Array.from(cards);
-            const index = cardsArray.indexOf(element);
-            
-            // The overlap is -380px, so each card is 380px higher than its natural flow
-            // Card 0: offset 0
-            // Card 1: offset 80 (approx, since min-h is 460)
-            // Let's use getBoundingClientRect for absolute precision relative to parent
             const stackRect = stack.getBoundingClientRect();
             const cardRect = element.getBoundingClientRect();
             const relativeOffset = cardRect.top - stackRect.top;
@@ -657,41 +633,20 @@
 
             element.classList.add('active');
             
-            // Smoothly hide top and bottom UI
             header.style.opacity = '0';
             header.style.transform = 'translateY(-30px)';
             header.style.pointerEvents = 'none';
             
-            title.style.opacity = '0';
-            title.style.transform = 'translateY(-30px)';
-            title.style.pointerEvents = 'none';
-
-            activity.style.opacity = '0';
-            activity.style.transform = 'translateY(30px)';
-            activity.style.pointerEvents = 'none';
-
-            achievements.style.opacity = '0';
-            achievements.style.transform = 'translateY(30px)';
-            achievements.style.pointerEvents = 'none';
-
             backBtn.classList.add('visible');
-            
-            // Move the stack container up so the clicked ticket is perfectly at the top
-            // We add a tiny buffer (40px) to not hit the very top of the screen
             stack.style.transform = `translateY(-${relativeOffset}px)`;
-            
-            // Prevent layout shifting by keeping the space-y but letting active card override
             stack.style.marginTop = "0"; 
         }
 
         function resetCards() {
             const cards = document.querySelectorAll('.wallet-card');
             const header = document.getElementById('header');
-            const title = document.getElementById('section-title');
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
-            const activity = document.getElementById('latest-activity');
-            const achievements = document.getElementById('lifelong-achievements');
 
             cards.forEach(card => {
                 card.classList.remove('active');
@@ -702,21 +657,7 @@
             header.style.transform = 'translateY(0)';
             header.style.pointerEvents = 'auto';
             
-            title.style.opacity = '1';
-            title.style.transform = 'translateY(0)';
-            title.style.pointerEvents = 'auto';
-
-            activity.style.opacity = '1';
-            activity.style.transform = 'translateY(0)';
-            activity.style.pointerEvents = 'auto';
-
-            achievements.style.opacity = '1';
-            achievements.style.transform = 'translateY(0)';
-            achievements.style.pointerEvents = 'auto';
-
             backBtn.classList.remove('visible');
-            
-            // Reset stack position back to original
             stack.style.transform = 'translateY(0)';
             stack.style.marginTop = "0";
         }
