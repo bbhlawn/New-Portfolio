@@ -738,18 +738,23 @@
             const content = document.getElementById('island-content');
             const closeBtn = document.getElementById('island-close');
 
-            setTimeout(() => {
-                island.classList.add('show');
-                
+            if (!island) return;
+
+            // Start almost immediately after mount
+            requestAnimationFrame(() => {
                 setTimeout(() => {
-                    island.classList.add('expanded');
+                    island.classList.add('show');
+                    
                     setTimeout(() => {
-                        content.style.opacity = '1';
-                        closeBtn.style.opacity = '1';
-                        content.classList.remove('pointer-events-none');
-                    }, 400); // Wait for expansion to finish
-                }, 800);
-            }, 500);
+                        island.classList.add('expanded');
+                        setTimeout(() => {
+                            content.style.opacity = '1';
+                            closeBtn.style.opacity = '1';
+                            content.classList.remove('pointer-events-none');
+                        }, 250); 
+                    }, 400); 
+                }, 100);
+            });
         }
 
         function dismissIsland() {
@@ -758,8 +763,12 @@
             island.style.opacity = '0';
         }
 
-        // Use DOMContentLoaded for immediate start without waiting for images
-        document.addEventListener('DOMContentLoaded', triggerIsland);
+        // Trigger as early as possible
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', triggerIsland);
+        } else {
+            triggerIsland();
+        }
     </script>
 </body>
 </html>
