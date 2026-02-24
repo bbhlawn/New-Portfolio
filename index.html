@@ -270,90 +270,6 @@
             border-radius: 3px;
         }
 
-        /* Case study — inline swipeable cards */
-        .case-study-view {
-            display: none;
-            margin-top: 24px;
-        }
-        .case-study-view.visible { display: block; }
-
-        .case-track {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding-bottom: 4px;
-        }
-        .case-track::-webkit-scrollbar { display: none; }
-
-        .case-card {
-            flex: 0 0 88%;
-            scroll-snap-align: start;
-            border-radius: 20px;
-            padding: 24px;
-            min-height: 280px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: white;
-        }
-        .case-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            opacity: 0.35;
-            font-weight: 300;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .case-title {
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: -0.02em;
-            margin: 10px 0 6px;
-        }
-        .case-subtitle {
-            font-size: 12px;
-            font-weight: 400;
-            opacity: 0.45;
-            margin-bottom: 14px;
-        }
-        .case-body {
-            font-size: 13px;
-            font-weight: 300;
-            opacity: 0.8;
-            line-height: 1.65;
-        }
-        .case-highlight {
-            margin-top: auto;
-            padding-top: 14px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            font-size: 11px;
-            opacity: 0.4;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-        }
-
-        .case-dots {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 14px;
-        }
-        .case-dots .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-        }
-        .case-dots .dot.active {
-            background: rgba(255,255,255,0.7);
-            width: 18px;
-            border-radius: 3px;
-        }
-        .card-main-content { transition: opacity 0.2s ease; }
     </style>
 </head>
 <body class="bg-[#F2F2F7] min-h-screen">
@@ -429,7 +345,6 @@
             
             <!-- Card 1: ARFI -->
             <div class="wallet-card min-h-[460px] rounded-[28px] bg-[#1E2E3D] p-7 text-white card-shadow z-10 flex flex-col justify-between overflow-hidden" onclick="expandCard(this)">
-                <div class="card-main-content">
                 <div>
                     <!-- Top Section -->
                     <div class="flex justify-between items-start mb-8">
@@ -532,43 +447,15 @@
                         <p class="label-slim mb-0.5 opacity-20">Partner</p>
                         <p class="text-[15px] font-normal tracking-tight opacity-90">Thantlang Council Int'l</p>
                     </div>
-                    <button class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5" onclick="viewCase(this, event)">
+                    <a class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5" href="case.html?project=arfi&from=index.html" onclick="event.stopPropagation()">
                         <span class="text-[11px] font-medium tracking-wide opacity-80">View Case</span>
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </button>
-                </div>
-                </div>
-
-                <div class="case-study-view">
-                    <div class="case-track">
-                        <div class="case-card" style="background:#2A3F52">
-                            <div><span class="case-label">01 — Problem</span><h5 class="case-title">Language at Risk</h5><p class="case-subtitle">Why this matters</p><p class="case-body">The Chin diaspora is losing its native languages at an alarming rate. Children raised abroad often cannot communicate with grandparents back home. Existing language apps don't serve minority languages with small speaker populations — leaving communities without digital tools to preserve their heritage.</p></div>
-                            <p class="case-highlight">50+ endangered Chin languages with no digital learning resources</p>
-                        </div>
-                        <div class="case-card" style="background:#335166">
-                            <div><span class="case-label">02 — Research</span><h5 class="case-title">Deep Ethnography</h5><p class="case-subtitle">Fieldwork & discovery</p><p class="case-body">Conducted ethnographic research across Chin communities in the US, interviewing families, elders, and youth. Mapped language transmission patterns, identified where breakdown occurs, and uncovered cultural practices that naturally support learning — like storytelling and communal singing.</p></div>
-                            <p class="case-highlight">30+ interviews across 4 US cities over 6 months</p>
-                        </div>
-                        <div class="case-card" style="background:#3D637A">
-                            <div><span class="case-label">03 — Insights</span><h5 class="case-title">Key Findings</h5><p class="case-subtitle">What the research revealed</p><p class="case-body">Language loss isn't just about vocabulary — it's tied to identity and belonging. Youth want to learn but lack accessible, culturally-resonant tools. The most effective learning happens through real conversation, not flashcards. Pronunciation is the biggest barrier, especially for tonal languages.</p></div>
-                            <p class="case-highlight">Pronunciation identified as the #1 barrier to retention</p>
-                        </div>
-                        <div class="case-card" style="background:#47758E">
-                            <div><span class="case-label">04 — Solution</span><h5 class="case-title">Culturally-Grounded Design</h5><p class="case-subtitle">Building ARFI</p><p class="case-body">Designed a language learning app grounded in cultural context. AI-powered pronunciation feedback helps learners hear and correct tonal differences. Spaced repetition is woven into conversational scenarios rather than isolated drills. The UI reflects Chin visual culture and storytelling traditions.</p></div>
-                            <p class="case-highlight">AI pronunciation engine trained on native speaker recordings</p>
-                        </div>
-                        <div class="case-card" style="background:#5187A2">
-                            <div><span class="case-label">05 — Impact</span><h5 class="case-title">Launching & Beyond</h5><p class="case-subtitle">Where we are now</p><p class="case-body">Currently in beta with community partners including the Thantlang Council International. Early testers report feeling more confident initiating conversations with family members. The platform is being prepared for public launch with plans to expand to additional Chin language variants.</p></div>
-                            <p class="case-highlight">Beta testing with 3 community partner organizations</p>
-                        </div>
-                    </div>
-                    <div class="case-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    </a>
                 </div>
             </div>
 
             <!-- Card 2: BELIF -->
             <div class="wallet-card min-h-[460px] rounded-[28px] bg-[#3D305A] p-7 text-white card-shadow z-20 flex flex-col justify-between overflow-hidden" onclick="expandCard(this)">
-                <div class="card-main-content">
                 <div>
                     <div class="flex justify-between items-start mb-8">
                         <div>
@@ -666,43 +553,15 @@
                         <p class="label-slim mb-0.5 opacity-20">Client</p>
                         <p class="text-[15px] font-normal tracking-tight opacity-90">LG H&H (Korea)</p>
                     </div>
-                    <button class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5" onclick="viewCase(this, event)">
+                    <a class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5" href="case.html?project=belif&from=index.html" onclick="event.stopPropagation()">
                         <span class="text-[11px] font-medium tracking-wide opacity-80">View Case</span>
                         <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </button>
-                </div>
-                </div>
-
-                <div class="case-study-view">
-                    <div class="case-track">
-                        <div class="case-card" style="background:#4D406E">
-                            <div><span class="case-label">01 — Context</span><h5 class="case-title">Brand at a Crossroads</h5><p class="case-subtitle">Understanding the landscape</p><p class="case-body">Belif, a Korean skincare brand under LG H&H, was looking to strengthen its positioning in an increasingly crowded K-beauty market. Despite strong product quality and heritage ingredients, the brand's identity wasn't resonating with younger consumers who were drawn to newer, trendier competitors.</p></div>
-                            <p class="case-highlight">K-beauty market projected at $13.9B by 2027</p>
-                        </div>
-                        <div class="case-card" style="background:#5D5082">
-                            <div><span class="case-label">02 — Discovery</span><h5 class="case-title">Consumer Deep Dive</h5><p class="case-subtitle">Focus groups & interviews</p><p class="case-body">Conducted extensive consumer research including focus groups and in-depth interviews to understand how consumers perceive Belif relative to competitors. Explored purchase drivers, brand associations, and unmet needs across different consumer segments to uncover positioning opportunities.</p></div>
-                            <p class="case-highlight">8 focus groups across 3 consumer segments</p>
-                        </div>
-                        <div class="case-card" style="background:#6D6096">
-                            <div><span class="case-label">03 — Analysis</span><h5 class="case-title">Building Archetypes</h5><p class="case-subtitle">Behavioral & attitudinal mapping</p><p class="case-body">Synthesized qualitative data into distinct consumer archetypes based on behavioral patterns and attitudinal dimensions. Mapped each archetype's relationship to skincare, brand loyalty, and purchase decision-making to identify which segments represent the highest strategic value for Belif.</p></div>
-                            <p class="case-highlight">4 distinct consumer archetypes identified</p>
-                        </div>
-                        <div class="case-card" style="background:#7D70AA">
-                            <div><span class="case-label">04 — Findings</span><h5 class="case-title">Strategic Insights</h5><p class="case-subtitle">What emerged from the data</p><p class="case-body">Uncovered a key tension: consumers valued authenticity and ingredient heritage but found Belif's current messaging too clinical. The "belief" wordplay in the brand name — the idea of trusting in honest ingredients — was a powerful emotional hook that wasn't being fully leveraged across touchpoints.</p></div>
-                            <p class="case-highlight">"Trust in ingredients" emerged as the strongest brand differentiator</p>
-                        </div>
-                        <div class="case-card" style="background:#8D80BE">
-                            <div><span class="case-label">05 — Recommendations</span><h5 class="case-title">Actionable Strategy</h5><p class="case-subtitle">Positioning for growth</p><p class="case-body">Delivered a comprehensive brand positioning strategy centered on authentic ingredient storytelling. Recommended shifting from feature-based messaging to emotion-driven narratives that connect Belif's herbal heritage to modern wellness values. Included tactical playbook for social media, packaging, and retail experience.</p></div>
-                            <p class="case-highlight">Strategy adopted for 2026 global brand refresh</p>
-                        </div>
-                    </div>
-                    <div class="case-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    </a>
                 </div>
             </div>
 
             <!-- Card 3: STEALTH -->
             <div class="wallet-card min-h-[460px] rounded-[28px] bg-[#4A1E1E] p-7 text-white card-shadow z-30 flex flex-col justify-between overflow-hidden" onclick="expandCard(this)">
-                <div class="card-main-content">
                 <div>
                     <div class="flex justify-between items-start mb-8">
                         <div>
@@ -794,37 +653,10 @@
                         <p class="label-slim mb-0.5 opacity-20">Client</p>
                         <p class="text-[15px] font-normal tracking-tight opacity-90">Confidential</p>
                     </div>
-                    <button class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5" onclick="viewCase(this, event)">
+                    <a class="bg-white/5 hover:bg-white/10 px-5 py-2 rounded-full flex items-center space-x-2 transition-colors border border-white/5" href="case.html?project=stealth&from=index.html" onclick="event.stopPropagation()">
                         <span class="text-[11px] font-medium tracking-wide opacity-80">View Case</span>
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </button>
-                </div>
-                </div>
-
-                <div class="case-study-view">
-                    <div class="case-track">
-                        <div class="case-card" style="background:#5E2D2D">
-                            <div><span class="case-label">01 — Opportunity</span><h5 class="case-title">Identifying the Gap</h5><p class="case-subtitle">Market exploration</p><p class="case-body">Identified an underserved segment in the fintech space where existing solutions fail to address the needs of emerging-market users. Through preliminary market research and conversations with potential users, validated a problem space with significant growth potential and low competition.</p></div>
-                            <p class="case-highlight">Target market of 200M+ underserved users globally</p>
-                        </div>
-                        <div class="case-card" style="background:#723C3C">
-                            <div><span class="case-label">02 — Validation</span><h5 class="case-title">Testing Assumptions</h5><p class="case-subtitle">Research & competitive analysis</p><p class="case-body">Conducted structured market validation through competitive analysis, user interviews, and demand testing. Built lightweight landing pages and ran experiments to test willingness to pay and feature priorities. Results confirmed strong demand for a simplified, trust-centric product experience.</p></div>
-                            <p class="case-highlight">78% of surveyed users expressed willingness to switch</p>
-                        </div>
-                        <div class="case-card" style="background:#864B4B">
-                            <div><span class="case-label">03 — Design</span><h5 class="case-title">Rapid Prototyping</h5><p class="case-subtitle">Design sprint methodology</p><p class="case-body">Ran intensive design sprints to explore multiple product directions. Created wireframes and interactive prototypes that were tested with target users. Iterated rapidly on core flows — onboarding, key actions, and trust signals — to arrive at a product concept that felt intuitive and differentiated.</p></div>
-                            <p class="case-highlight">3 design sprints, 12 prototype iterations</p>
-                        </div>
-                        <div class="case-card" style="background:#9A5A5A">
-                            <div><span class="case-label">04 — Prototype</span><h5 class="case-title">Building the MVP</h5><p class="case-subtitle">From concept to code</p><p class="case-body">Translated the validated design into a functional MVP. Focused on the core value proposition — stripping away complexity to deliver a product that does one thing exceptionally well. Established the technical foundation and design system that will scale with the product.</p></div>
-                            <p class="case-highlight">MVP built in 4 weeks with a 2-person team</p>
-                        </div>
-                        <div class="case-card" style="background:#AE6969">
-                            <div><span class="case-label">05 — Next Steps</span><h5 class="case-title">Preparing for Launch</h5><p class="case-subtitle">What's ahead</p><p class="case-body">Currently preparing for a closed beta launch with a curated group of early adopters. Building feedback loops and analytics infrastructure to learn quickly post-launch. Exploring partnerships with complementary platforms and beginning conversations with potential investors for seed funding.</p></div>
-                            <p class="case-highlight">Closed beta target: Q1 2026</p>
-                        </div>
-                    </div>
-                    <div class="case-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1129,8 +961,6 @@
                     card.classList.remove('inactive');
                     card.style.display = '';
                     card.style.marginTop = '';
-                    const cv = card.querySelector('.case-study-view');
-                    if (cv) { cv.classList.remove('visible'); const ct = cv.querySelector('.case-track'); if (ct) ct.scrollLeft = 0; }
                 });
 
                 header.style.display = '';
@@ -1207,27 +1037,6 @@
             });
         });
 
-        // Case study track dot indicators
-        document.querySelectorAll('.case-track').forEach(track => {
-            const caseView = track.closest('.case-study-view');
-            const dots = caseView.querySelectorAll('.case-dots .dot');
-
-            track.addEventListener('scroll', () => {
-                const scrollLeft = track.scrollLeft;
-                const firstCard = track.querySelector('.case-card');
-                if (!firstCard) return;
-                const cardWidth = firstCard.offsetWidth + 12;
-                const idx = Math.round(scrollLeft / cardWidth);
-                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-            });
-        });
-
-        function viewCase(btn, e) {
-            e.stopPropagation();
-            const card = btn.closest('.wallet-card');
-            const caseView = card.querySelector('.case-study-view');
-            caseView.classList.toggle('visible');
-        }
     </script>
 </body>
 </html>

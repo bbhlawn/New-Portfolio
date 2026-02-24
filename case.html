@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Case Study</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🫶</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            height: 100dvh;
+        }
+
+        .case-shell {
+            display: flex;
+            flex-direction: column;
+            height: 100dvh;
+            color: white;
+        }
+
+        .case-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .back-btn:active { background: rgba(255,255,255,0.18); }
+
+        .case-counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.05em;
+        }
+
+        .case-track {
+            flex: 1;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .case-track::-webkit-scrollbar { display: none; }
+
+        .case-card {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 32px 72px;
+            min-height: 100%;
+            box-sizing: border-box;
+        }
+
+        .case-inner {
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .case-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            opacity: 0.35;
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .case-title {
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin: 14px 0 8px;
+        }
+        .case-subtitle {
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 0.4;
+            margin-bottom: 24px;
+        }
+        .case-body {
+            font-size: 15px;
+            font-weight: 300;
+            opacity: 0.8;
+            line-height: 1.75;
+        }
+        .case-highlight {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 12px;
+            opacity: 0.4;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .case-dots {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 20px 0 28px;
+            z-index: 10;
+        }
+        .case-dots .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        .case-dots .dot.active {
+            background: rgba(255,255,255,0.7);
+            width: 18px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="case-shell" id="case-shell">
+        <div class="case-header">
+            <a class="back-btn" id="back-btn" href="index.html">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                Back
+            </a>
+            <span class="case-counter" id="counter">1 / 5</span>
+        </div>
+
+        <div class="case-track" id="track"></div>
+
+        <div class="case-dots" id="dots"></div>
+    </div>
+
+    <script>
+        const projects = {
+            arfi: {
+                colors: ['#2A3F52','#335166','#3D637A','#47758E','#5187A2'],
+                steps: [
+                    { label: '01 — Problem', title: 'Language at Risk', subtitle: 'Why this matters', body: 'The Chin diaspora is losing its native languages at an alarming rate. Children raised abroad often cannot communicate with grandparents back home. Existing language apps don\'t serve minority languages with small speaker populations — leaving communities without digital tools to preserve their heritage.', highlight: '50+ endangered Chin languages with no digital learning resources' },
+                    { label: '02 — Research', title: 'Deep Ethnography', subtitle: 'Fieldwork & discovery', body: 'Conducted ethnographic research across Chin communities in the US, interviewing families, elders, and youth. Mapped language transmission patterns, identified where breakdown occurs, and uncovered cultural practices that naturally support learning — like storytelling and communal singing.', highlight: '30+ interviews across 4 US cities over 6 months' },
+                    { label: '03 — Insights', title: 'Key Findings', subtitle: 'What the research revealed', body: 'Language loss isn\'t just about vocabulary — it\'s tied to identity and belonging. Youth want to learn but lack accessible, culturally-resonant tools. The most effective learning happens through real conversation, not flashcards. Pronunciation is the biggest barrier, especially for tonal languages.', highlight: 'Pronunciation identified as the #1 barrier to retention' },
+                    { label: '04 — Solution', title: 'Culturally-Grounded Design', subtitle: 'Building ARFI', body: 'Designed a language learning app grounded in cultural context. AI-powered pronunciation feedback helps learners hear and correct tonal differences. Spaced repetition is woven into conversational scenarios rather than isolated drills. The UI reflects Chin visual culture and storytelling traditions.', highlight: 'AI pronunciation engine trained on native speaker recordings' },
+                    { label: '05 — Impact', title: 'Launching & Beyond', subtitle: 'Where we are now', body: 'Currently in beta with community partners including the Thantlang Council International. Early testers report feeling more confident initiating conversations with family members. The platform is being prepared for public launch with plans to expand to additional Chin language variants.', highlight: 'Beta testing with 3 community partner organizations' }
+                ]
+            },
+            belif: {
+                colors: ['#4D406E','#5D5082','#6D6096','#7D70AA','#8D80BE'],
+                steps: [
+                    { label: '01 — Context', title: 'Brand at a Crossroads', subtitle: 'Understanding the landscape', body: 'Belif, a Korean skincare brand under LG H&H, was looking to strengthen its positioning in an increasingly crowded K-beauty market. Despite strong product quality and heritage ingredients, the brand\'s identity wasn\'t resonating with younger consumers who were drawn to newer, trendier competitors.', highlight: 'K-beauty market projected at $13.9B by 2027' },
+                    { label: '02 — Discovery', title: 'Consumer Deep Dive', subtitle: 'Focus groups & interviews', body: 'Conducted extensive consumer research including focus groups and in-depth interviews to understand how consumers perceive Belif relative to competitors. Explored purchase drivers, brand associations, and unmet needs across different consumer segments to uncover positioning opportunities.', highlight: '8 focus groups across 3 consumer segments' },
+                    { label: '03 — Analysis', title: 'Building Archetypes', subtitle: 'Behavioral & attitudinal mapping', body: 'Synthesized qualitative data into distinct consumer archetypes based on behavioral patterns and attitudinal dimensions. Mapped each archetype\'s relationship to skincare, brand loyalty, and purchase decision-making to identify which segments represent the highest strategic value for Belif.', highlight: '4 distinct consumer archetypes identified' },
+                    { label: '04 — Findings', title: 'Strategic Insights', subtitle: 'What emerged from the data', body: 'Uncovered a key tension: consumers valued authenticity and ingredient heritage but found Belif\'s current messaging too clinical. The "belief" wordplay in the brand name — the idea of trusting in honest ingredients — was a powerful emotional hook that wasn\'t being fully leveraged across touchpoints.', highlight: '"Trust in ingredients" emerged as the strongest brand differentiator' },
+                    { label: '05 — Recommendations', title: 'Actionable Strategy', subtitle: 'Positioning for growth', body: 'Delivered a comprehensive brand positioning strategy centered on authentic ingredient storytelling. Recommended shifting from feature-based messaging to emotion-driven narratives that connect Belif\'s herbal heritage to modern wellness values. Included tactical playbook for social media, packaging, and retail experience.', highlight: 'Strategy adopted for 2026 global brand refresh' }
+                ]
+            },
+            stealth: {
+                colors: ['#5E2D2D','#723C3C','#864B4B','#9A5A5A','#AE6969'],
+                steps: [
+                    { label: '01 — Opportunity', title: 'Identifying the Gap', subtitle: 'Market exploration', body: 'Identified an underserved segment in the fintech space where existing solutions fail to address the needs of emerging-market users. Through preliminary market research and conversations with potential users, validated a problem space with significant growth potential and low competition.', highlight: 'Target market of 200M+ underserved users globally' },
+                    { label: '02 — Validation', title: 'Testing Assumptions', subtitle: 'Research & competitive analysis', body: 'Conducted structured market validation through competitive analysis, user interviews, and demand testing. Built lightweight landing pages and ran experiments to test willingness to pay and feature priorities. Results confirmed strong demand for a simplified, trust-centric product experience.', highlight: '78% of surveyed users expressed willingness to switch' },
+                    { label: '03 — Design', title: 'Rapid Prototyping', subtitle: 'Design sprint methodology', body: 'Ran intensive design sprints to explore multiple product directions. Created wireframes and interactive prototypes that were tested with target users. Iterated rapidly on core flows — onboarding, key actions, and trust signals — to arrive at a product concept that felt intuitive and differentiated.', highlight: '3 design sprints, 12 prototype iterations' },
+                    { label: '04 — Prototype', title: 'Building the MVP', subtitle: 'From concept to code', body: 'Translated the validated design into a functional MVP. Focused on the core value proposition — stripping away complexity to deliver a product that does one thing exceptionally well. Established the technical foundation and design system that will scale with the product.', highlight: 'MVP built in 4 weeks with a 2-person team' },
+                    { label: '05 — Next Steps', title: 'Preparing for Launch', subtitle: 'What\'s ahead', body: 'Currently preparing for a closed beta launch with a curated group of early adopters. Building feedback loops and analytics infrastructure to learn quickly post-launch. Exploring partnerships with complementary platforms and beginning conversations with potential investors for seed funding.', highlight: 'Closed beta target: Q1 2026' }
+                ]
+            },
+            duara: {
+                colors: ['#3E4D3B','#4A5E47','#566F53','#62805F','#6E916B'],
+                steps: [
+                    { label: '01 — Context', title: 'Education Without Borders', subtitle: 'The challenge', body: 'Duara is an education platform connecting learners across borders. The challenge was to design an experience that bridges cultural and linguistic differences, making cross-cultural learning feel natural rather than forced. The existing product was functional but lacked the warmth and engagement to retain users beyond initial curiosity.', highlight: 'Users from 12+ countries with 8 primary languages' },
+                    { label: '02 — Discovery', title: 'Understanding Learners', subtitle: 'User research', body: 'Conducted user research with both learners and educators across multiple countries. Identified that the biggest drop-off happened when learners felt isolated — when the experience shifted from communal to individual. Discovered that storytelling and shared projects were the most powerful engagement drivers.', highlight: 'Communal learning 3x more engaging than solo modules' },
+                    { label: '03 — Design', title: 'Collaborative Experience', subtitle: 'Redesigning the platform', body: 'Redesigned the core learning experience around collaborative projects and peer connections. Created a matching system that pairs learners with complementary backgrounds and goals. Introduced shared digital spaces where small groups work through cultural exchange activities together.', highlight: 'New peer matching algorithm with 85% satisfaction rate' },
+                    { label: '04 — Testing', title: 'Iterative Refinement', subtitle: 'Prototype testing', body: 'Ran multiple rounds of user testing with learners from different cultural backgrounds. Iterated on the interaction model, adjusting pacing, scaffolding, and communication tools. Worked closely with educators to ensure the redesigned experience supported learning outcomes while maintaining cultural sensitivity.', highlight: '4 testing rounds across 6 countries' },
+                    { label: '05 — Outcome', title: 'Measurable Impact', subtitle: 'Results & next steps', body: 'The redesigned platform saw significant improvements in engagement and retention. Learner completion rates increased and qualitative feedback showed users felt more connected to their peers. The collaborative model is now being expanded to additional subject areas and age groups.', highlight: '40% increase in course completion rates' }
+                ]
+            },
+            global: {
+                colors: ['#3C3C3E','#4C4C4E','#5C5C5E','#6C6C6E','#7C7C7E'],
+                steps: [
+                    { label: '01 — Mission', title: 'Operations at Scale', subtitle: 'The organizational challenge', body: 'An international NGO needed to modernize how it coordinates operations across multiple countries. Information silos, inconsistent processes, and limited visibility into field activities were creating bottlenecks that slowed response times and reduced the impact of programs on the ground.', highlight: 'Operations spanning 15+ countries across 3 continents' },
+                    { label: '02 — Assessment', title: 'Mapping the System', subtitle: 'Organizational research', body: 'Conducted a comprehensive operational assessment by interviewing staff at headquarters and in the field. Mapped existing workflows, communication channels, and decision-making processes. Identified critical pain points where information loss and delays had the greatest impact on program delivery.', highlight: '40+ stakeholder interviews across 8 country offices' },
+                    { label: '03 — Strategy', title: 'Designing the Framework', subtitle: 'Process optimization', body: 'Developed a unified operational framework that standardizes core processes while allowing for local adaptation. Created a communication protocol that ensures critical information flows bi-directionally between field and headquarters. Designed feedback mechanisms so operational improvements are continuously informed by frontline experience.', highlight: 'Unified framework adaptable across diverse operational contexts' },
+                    { label: '04 — Implementation', title: 'Rolling Out Change', subtitle: 'Phased deployment', body: 'Led a phased rollout starting with pilot country offices before expanding globally. Provided training and change management support to ensure adoption. Built dashboards and reporting tools that give leadership real-time visibility into operations, enabling faster and more informed decision-making.', highlight: 'Pilot phase completed in 3 offices within 6 weeks' },
+                    { label: '05 — Impact', title: 'Scaling for Impact', subtitle: 'Measurable outcomes', body: 'The new framework reduced response times significantly and improved coordination between offices. Leadership now has clear visibility into field operations for the first time. The approach has been recognized as a model by peer organizations and is being considered for adoption across the broader NGO network.', highlight: '35% reduction in coordination response time' }
+                ]
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const projectKey = params.get('project');
+        const from = params.get('from') || 'index.html';
+        const project = projects[projectKey];
+
+        if (!project) {
+            window.location.href = from;
+        }
+
+        document.getElementById('back-btn').href = from;
+
+        const track = document.getElementById('track');
+        const dotsContainer = document.getElementById('dots');
+        const counter = document.getElementById('counter');
+        const total = project.steps.length;
+
+        project.steps.forEach((step, i) => {
+            const card = document.createElement('div');
+            card.className = 'case-card';
+            card.style.background = project.colors[i];
+            card.innerHTML = `<div class="case-inner"><span class="case-label">${step.label}</span><h2 class="case-title">${step.title}</h2><p class="case-subtitle">${step.subtitle}</p><p class="case-body">${step.body}</p><p class="case-highlight">${step.highlight}</p></div>`;
+            track.appendChild(card);
+
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('.dot');
+
+        track.addEventListener('scroll', () => {
+            const cardWidth = track.querySelector('.case-card').offsetWidth;
+            const idx = Math.round(track.scrollLeft / cardWidth);
+            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            counter.textContent = (idx + 1) + ' / ' + total;
+        });
+    </script>
+</body>
+</html>
