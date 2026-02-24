@@ -752,6 +752,7 @@
             const title = document.getElementById('section-title');
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
+            const container = stack.parentElement;
             const workExp = document.getElementById('work-experience');
             const teaching = document.getElementById('teaching-leadership');
             const achievements = document.getElementById('lifelong-achievements');
@@ -762,7 +763,7 @@
 
             cards.forEach(card => {
                 if (card !== element) {
-                    card.classList.add('inactive');
+                    card.style.display = 'none';
                 }
             });
 
@@ -774,11 +775,14 @@
             teaching.style.display = 'none';
             achievements.style.display = 'none';
 
-            backBtn.classList.add('visible');
-
-            stack.style.paddingTop = '80px';
+            container.style.paddingTop = '0';
+            container.style.paddingBottom = '0';
+            container.style.minHeight = '0';
+            stack.style.marginBottom = '0';
+            stack.style.paddingTop = '60px';
             stack.style.transform = 'none';
-            stack.style.marginTop = '0';
+
+            backBtn.classList.add('visible');
 
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
@@ -789,6 +793,7 @@
             const title = document.getElementById('section-title');
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
+            const container = stack.parentElement;
             const workExp = document.getElementById('work-experience');
             const teaching = document.getElementById('teaching-leadership');
             const achievements = document.getElementById('lifelong-achievements');
@@ -796,6 +801,7 @@
             cards.forEach(card => {
                 card.classList.remove('active');
                 card.classList.remove('inactive');
+                card.style.display = '';
             });
 
             header.style.display = '';
@@ -804,11 +810,14 @@
             teaching.style.display = '';
             achievements.style.display = '';
 
-            backBtn.classList.remove('visible');
-
+            container.style.paddingTop = '';
+            container.style.paddingBottom = '';
+            container.style.minHeight = '';
+            stack.style.marginBottom = '';
             stack.style.paddingTop = '';
             stack.style.transform = 'translateY(0)';
-            stack.style.marginTop = '0';
+
+            backBtn.classList.remove('visible');
 
             window.scrollTo({ top: savedScrollY, behavior: 'instant' });
         }

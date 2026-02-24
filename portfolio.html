@@ -690,6 +690,7 @@
             const header = document.getElementById('header');
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
+            const container = stack.parentElement;
 
             if (element.classList.contains('active')) return;
 
@@ -697,7 +698,7 @@
 
             cards.forEach(card => {
                 if (card !== element) {
-                    card.classList.add('inactive');
+                    card.style.display = 'none';
                 }
             });
 
@@ -705,11 +706,14 @@
 
             header.style.display = 'none';
 
-            backBtn.classList.add('visible');
-
-            stack.style.paddingTop = '80px';
+            container.style.paddingTop = '0';
+            container.style.paddingBottom = '0';
+            container.style.minHeight = '0';
+            stack.style.marginBottom = '0';
+            stack.style.paddingTop = '60px';
             stack.style.transform = 'none';
-            stack.style.marginTop = '0';
+
+            backBtn.classList.add('visible');
 
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
@@ -719,19 +723,24 @@
             const header = document.getElementById('header');
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
+            const container = stack.parentElement;
 
             cards.forEach(card => {
                 card.classList.remove('active');
                 card.classList.remove('inactive');
+                card.style.display = '';
             });
 
             header.style.display = '';
 
-            backBtn.classList.remove('visible');
-
+            container.style.paddingTop = '';
+            container.style.paddingBottom = '';
+            container.style.minHeight = '';
+            stack.style.marginBottom = '';
             stack.style.paddingTop = '';
             stack.style.transform = 'translateY(0)';
-            stack.style.marginTop = '0';
+
+            backBtn.classList.remove('visible');
 
             window.scrollTo({ top: savedScrollY, behavior: 'instant' });
         }
