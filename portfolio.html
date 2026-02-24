@@ -205,9 +205,81 @@
             border-radius: 28px;
             padding: 12px 16px;
         }
+
+        .page-overlay {
+            position: fixed;
+            inset: 0;
+            background: #f2f2f7;
+            z-index: 90;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .page-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .steps-slider { margin-top: 24px; }
+        .steps-track {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 4px;
+        }
+        .steps-track::-webkit-scrollbar { display: none; }
+        .step-card {
+            flex: 0 0 85%;
+            scroll-snap-align: start;
+            border-radius: 20px;
+            padding: 24px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            opacity: 0.4;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        .step-title {
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin: 12px 0 6px;
+        }
+        .step-desc {
+            font-size: 13px;
+            font-weight: 300;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+        .steps-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 14px;
+        }
+        .steps-dots .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        .steps-dots .dot.active {
+            background: rgba(255,255,255,0.7);
+            width: 18px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="bg-[#F2F2F7] min-h-screen">
+    <div id="page-overlay" class="page-overlay"></div>
+
     <!-- Dynamic Island Notification -->
     <div id="dynamic-island" class="dynamic-island">
         <div class="flex items-center gap-3 w-full h-full">
@@ -332,6 +404,17 @@
                                     LAUNCHING
                                 </span>
                             </div>
+
+                            <div class="steps-slider">
+                                <div class="steps-track">
+                                    <div class="step-card" style="background:#2A3F52"><div><span class="step-number">01</span><h5 class="step-title">Research</h5><p class="step-desc">Ethnographic fieldwork with Chin diaspora communities across the US</p></div></div>
+                                    <div class="step-card" style="background:#335166"><div><span class="step-number">02</span><h5 class="step-title">Define</h5><p class="step-desc">Mapped language loss patterns and identified key intervention points</p></div></div>
+                                    <div class="step-card" style="background:#3D637A"><div><span class="step-number">03</span><h5 class="step-title">Design</h5><p class="step-desc">Prototyped culturally-grounded learning flows and UI patterns</p></div></div>
+                                    <div class="step-card" style="background:#47758E"><div><span class="step-number">04</span><h5 class="step-title">Build</h5><p class="step-desc">Developed MVP with AI-powered pronunciation and spaced repetition</p></div></div>
+                                    <div class="step-card" style="background:#5187A2"><div><span class="step-number">05</span><h5 class="step-title">Launch</h5><p class="step-desc">Beta testing with community partners and iterating on feedback</p></div></div>
+                                </div>
+                                <div class="steps-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -411,6 +494,17 @@
                                     ONGOING
                                 </span>
                             </div>
+
+                            <div class="steps-slider">
+                                <div class="steps-track">
+                                    <div class="step-card" style="background:#4D406E"><div><span class="step-number">01</span><h5 class="step-title">Discover</h5><p class="step-desc">Mapped the competitive landscape and brand positioning gaps</p></div></div>
+                                    <div class="step-card" style="background:#5D5082"><div><span class="step-number">02</span><h5 class="step-title">Research</h5><p class="step-desc">Conducted focus groups and in-depth consumer interviews</p></div></div>
+                                    <div class="step-card" style="background:#6D6096"><div><span class="step-number">03</span><h5 class="step-title">Analyze</h5><p class="step-desc">Built consumer archetypes from behavioral and attitudinal data</p></div></div>
+                                    <div class="step-card" style="background:#7D70AA"><div><span class="step-number">04</span><h5 class="step-title">Synthesize</h5><p class="step-desc">Developed insight frameworks connecting consumer needs to brand</p></div></div>
+                                    <div class="step-card" style="background:#8D80BE"><div><span class="step-number">05</span><h5 class="step-title">Strategy</h5><p class="step-desc">Delivering actionable brand positioning recommendations</p></div></div>
+                                </div>
+                                <div class="steps-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -487,6 +581,17 @@
                                     <span class="w-1.5 h-1.5 rounded-full bg-orange-500/50"></span>
                                     STEALTH
                                 </span>
+                            </div>
+
+                            <div class="steps-slider">
+                                <div class="steps-track">
+                                    <div class="step-card" style="background:#5E2D2D"><div><span class="step-number">01</span><h5 class="step-title">Ideate</h5><p class="step-desc">Explored fintech concepts addressing underserved market segments</p></div></div>
+                                    <div class="step-card" style="background:#723C3C"><div><span class="step-number">02</span><h5 class="step-title">Validate</h5><p class="step-desc">Conducted market research and competitive analysis</p></div></div>
+                                    <div class="step-card" style="background:#864B4B"><div><span class="step-number">03</span><h5 class="step-title">Prototype</h5><p class="step-desc">Designed and tested MVP wireframes with target users</p></div></div>
+                                    <div class="step-card" style="background:#9A5A5A"><div><span class="step-number">04</span><h5 class="step-title">Sprint</h5><p class="step-desc">Ran rapid design sprints to refine core product flows</p></div></div>
+                                    <div class="step-card" style="background:#AE6969"><div><span class="step-number">05</span><h5 class="step-title">Beta</h5><p class="step-desc">Preparing for closed beta launch and user testing</p></div></div>
+                                </div>
+                                <div class="steps-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
                             </div>
                         </div>
                     </div>
@@ -567,6 +672,17 @@
                                     COMPLETE
                                 </span>
                             </div>
+
+                            <div class="steps-slider">
+                                <div class="steps-track">
+                                    <div class="step-card" style="background:#3E4D3B"><div><span class="step-number">01</span><h5 class="step-title">Inquire</h5><p class="step-desc">Contextual inquiry with educators and students in Kenya</p></div></div>
+                                    <div class="step-card" style="background:#4E5D4B"><div><span class="step-number">02</span><h5 class="step-title">Map</h5><p class="step-desc">Mapped existing data systems and identified critical gaps</p></div></div>
+                                    <div class="step-card" style="background:#5E6D5B"><div><span class="step-number">03</span><h5 class="step-title">Design</h5><p class="step-desc">Designed integrated data management workflows</p></div></div>
+                                    <div class="step-card" style="background:#6E7D6B"><div><span class="step-number">04</span><h5 class="step-title">Mockup</h5><p class="step-desc">Created high-fidelity mockups for the edtech platform</p></div></div>
+                                    <div class="step-card" style="background:#7E8D7B"><div><span class="step-number">05</span><h5 class="step-title">Deliver</h5><p class="step-desc">Handed off system design specs and implementation guide</p></div></div>
+                                </div>
+                                <div class="steps-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -644,6 +760,17 @@
                                     SCALED
                                 </span>
                             </div>
+
+                            <div class="steps-slider">
+                                <div class="steps-track">
+                                    <div class="step-card" style="background:#3C3C3E"><div><span class="step-number">01</span><h5 class="step-title">Assess</h5><p class="step-desc">Evaluated local operations and identified scaling bottlenecks</p></div></div>
+                                    <div class="step-card" style="background:#4C4C4E"><div><span class="step-number">02</span><h5 class="step-title">Design</h5><p class="step-desc">Designed service blueprints for sustainable logistics</p></div></div>
+                                    <div class="step-card" style="background:#5C5C5E"><div><span class="step-number">03</span><h5 class="step-title">Pilot</h5><p class="step-desc">Ran pilot programs across multiple regional sites</p></div></div>
+                                    <div class="step-card" style="background:#6C6C6E"><div><span class="step-number">04</span><h5 class="step-title">Optimize</h5><p class="step-desc">Refined processes based on operational feedback loops</p></div></div>
+                                    <div class="step-card" style="background:#7C7C7E"><div><span class="step-number">05</span><h5 class="step-title">Scale</h5><p class="step-desc">Expanded operations from local to global reach</p></div></div>
+                                </div>
+                                <div class="steps-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -691,32 +818,38 @@
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
             const container = stack.parentElement;
+            const overlay = document.getElementById('page-overlay');
 
             if (element.classList.contains('active')) return;
 
             savedScrollY = window.scrollY;
+            overlay.classList.add('active');
 
-            cards.forEach(card => {
-                if (card !== element) {
-                    card.style.display = 'none';
-                }
-            });
+            setTimeout(() => {
+                cards.forEach(card => {
+                    if (card !== element) {
+                        card.style.display = 'none';
+                    }
+                });
 
-            element.classList.add('active');
-            element.style.marginTop = '0';
+                element.classList.add('active');
+                element.style.marginTop = '0';
 
-            header.style.display = 'none';
+                header.style.display = 'none';
 
-            container.style.paddingTop = '0';
-            container.style.paddingBottom = '24px';
-            container.style.minHeight = '0';
-            stack.style.marginBottom = '0';
-            stack.style.paddingTop = '88px';
-            stack.style.transform = 'none';
+                container.style.paddingTop = '0';
+                container.style.paddingBottom = '24px';
+                container.style.minHeight = '0';
+                stack.style.marginBottom = '0';
+                stack.style.paddingTop = '88px';
+                stack.style.transform = 'none';
 
-            backBtn.classList.add('visible');
+                backBtn.classList.add('visible');
 
-            window.scrollTo({ top: 0, behavior: 'instant' });
+                window.scrollTo({ top: 0, behavior: 'instant' });
+
+                setTimeout(() => { overlay.classList.remove('active'); }, 50);
+            }, 300);
         }
 
         function resetCards() {
@@ -725,26 +858,33 @@
             const backBtn = document.getElementById('back-btn');
             const stack = document.getElementById('card-stack');
             const container = stack.parentElement;
+            const overlay = document.getElementById('page-overlay');
 
-            cards.forEach(card => {
-                card.classList.remove('active');
-                card.classList.remove('inactive');
-                card.style.display = '';
-                card.style.marginTop = '';
-            });
+            overlay.classList.add('active');
 
-            header.style.display = '';
+            setTimeout(() => {
+                cards.forEach(card => {
+                    card.classList.remove('active');
+                    card.classList.remove('inactive');
+                    card.style.display = '';
+                    card.style.marginTop = '';
+                });
 
-            container.style.paddingTop = '';
-            container.style.paddingBottom = '';
-            container.style.minHeight = '';
-            stack.style.marginBottom = '';
-            stack.style.paddingTop = '';
-            stack.style.transform = 'translateY(0)';
+                header.style.display = '';
 
-            backBtn.classList.remove('visible');
+                container.style.paddingTop = '';
+                container.style.paddingBottom = '';
+                container.style.minHeight = '';
+                stack.style.marginBottom = '';
+                stack.style.paddingTop = '';
+                stack.style.transform = 'translateY(0)';
 
-            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+                backBtn.classList.remove('visible');
+
+                window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+
+                setTimeout(() => { overlay.classList.remove('active'); }, 50);
+            }, 300);
         }
 
         // Dynamic Island Animation Logic
@@ -784,6 +924,16 @@
         } else {
             triggerIsland();
         }
+
+        document.querySelectorAll('.steps-track').forEach(track => {
+            const dots = track.nextElementSibling.querySelectorAll('.dot');
+            track.addEventListener('scroll', () => {
+                const scrollLeft = track.scrollLeft;
+                const cardWidth = track.querySelector('.step-card').offsetWidth + 12;
+                const idx = Math.round(scrollLeft / cardWidth);
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            });
+        });
     </script>
 </body>
 </html>
