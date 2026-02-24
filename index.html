@@ -744,6 +744,8 @@
             }
         }
 
+        let savedScrollY = 0;
+
         function expandCard(element) {
             const cards = document.querySelectorAll('.wallet-card');
             const header = document.getElementById('header');
@@ -756,9 +758,7 @@
 
             if (element.classList.contains('active')) return;
 
-            const stackRect = stack.getBoundingClientRect();
-            const cardRect = element.getBoundingClientRect();
-            const relativeOffset = cardRect.top - stackRect.top;
+            savedScrollY = window.scrollY;
 
             cards.forEach(card => {
                 if (card !== element) {
@@ -767,31 +767,20 @@
             });
 
             element.classList.add('active');
-            
-            header.style.opacity = '0';
-            header.style.transform = 'translateY(-30px)';
-            header.style.pointerEvents = 'none';
-            
-            title.style.opacity = '0';
-            title.style.transform = 'translateY(-30px)';
-            title.style.pointerEvents = 'none';
 
-            workExp.style.opacity = '0';
-            workExp.style.transform = 'translateY(30px)';
-            workExp.style.pointerEvents = 'none';
-
-            teaching.style.opacity = '0';
-            teaching.style.transform = 'translateY(30px)';
-            teaching.style.pointerEvents = 'none';
-
-            achievements.style.opacity = '0';
-            achievements.style.transform = 'translateY(30px)';
-            achievements.style.pointerEvents = 'none';
+            header.style.display = 'none';
+            title.style.display = 'none';
+            workExp.style.display = 'none';
+            teaching.style.display = 'none';
+            achievements.style.display = 'none';
 
             backBtn.classList.add('visible');
-            
-            stack.style.transform = `translateY(-${relativeOffset}px)`;
-            stack.style.marginTop = "0"; 
+
+            stack.style.paddingTop = '80px';
+            stack.style.transform = 'none';
+            stack.style.marginTop = '0';
+
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
         function resetCards() {
@@ -809,30 +798,19 @@
                 card.classList.remove('inactive');
             });
 
-            header.style.opacity = '1';
-            header.style.transform = 'translateY(0)';
-            header.style.pointerEvents = 'auto';
-            
-            title.style.opacity = '1';
-            title.style.transform = 'translateY(0)';
-            title.style.pointerEvents = 'auto';
-
-            workExp.style.opacity = '1';
-            workExp.style.transform = 'translateY(0)';
-            workExp.style.pointerEvents = 'auto';
-
-            teaching.style.opacity = '1';
-            teaching.style.transform = 'translateY(0)';
-            teaching.style.pointerEvents = 'auto';
-
-            achievements.style.opacity = '1';
-            achievements.style.transform = 'translateY(0)';
-            achievements.style.pointerEvents = 'auto';
+            header.style.display = '';
+            title.style.display = '';
+            workExp.style.display = '';
+            teaching.style.display = '';
+            achievements.style.display = '';
 
             backBtn.classList.remove('visible');
-            
+
+            stack.style.paddingTop = '';
             stack.style.transform = 'translateY(0)';
-            stack.style.marginTop = "0";
+            stack.style.marginTop = '0';
+
+            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
         }
 
         // Dynamic Island Animation Logic
