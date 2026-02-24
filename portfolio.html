@@ -276,75 +276,34 @@
             border-radius: 3px;
         }
 
-        /* Case study view — full-screen overlay */
+        /* Case study — inline swipeable cards */
         .case-study-view {
             display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            overflow: hidden;
+            margin-top: 24px;
         }
-        .case-study-view.visible { display: flex; flex-direction: column; }
-
-        .case-nav {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 24px;
-        }
-        .case-close-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.08);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 400;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .case-close-btn:active { background: rgba(255,255,255,0.2); }
-        .case-counter {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 0.05em;
-        }
+        .case-study-view.visible { display: block; }
 
         .case-track {
-            flex: 1;
             display: flex;
+            gap: 12px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            padding-bottom: 4px;
         }
         .case-track::-webkit-scrollbar { display: none; }
 
         .case-card {
-            flex: 0 0 100%;
+            flex: 0 0 88%;
             scroll-snap-align: start;
+            border-radius: 20px;
+            padding: 24px;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 80px 32px 80px;
-            min-height: 100%;
-            box-sizing: border-box;
-        }
-        .case-card-inner {
-            max-width: 400px;
-            margin: 0 auto;
-            width: 100%;
+            justify-content: space-between;
+            color: white;
         }
         .case-label {
             font-family: 'JetBrains Mono', monospace;
@@ -355,46 +314,38 @@
             text-transform: uppercase;
         }
         .case-title {
-            font-size: 26px;
+            font-size: 20px;
             font-weight: 500;
             letter-spacing: -0.02em;
-            margin: 14px 0 8px;
-            color: white;
+            margin: 10px 0 6px;
         }
         .case-subtitle {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 400;
             opacity: 0.45;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
         .case-body {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 300;
             opacity: 0.8;
-            line-height: 1.7;
-            color: white;
+            line-height: 1.65;
         }
         .case-highlight {
-            margin-top: 28px;
-            padding-top: 16px;
+            margin-top: auto;
+            padding-top: 14px;
             border-top: 1px solid rgba(255,255,255,0.08);
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.4;
             font-weight: 400;
             letter-spacing: 0.02em;
-            color: white;
         }
 
         .case-dots {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             display: flex;
             justify-content: center;
             gap: 6px;
-            padding: 20px 0 28px;
-            z-index: 10;
+            margin-top: 14px;
         }
         .case-dots .dot {
             width: 6px;
@@ -567,16 +518,9 @@
                 </div>
 
                 <div class="case-study-view">
-                    <div class="case-nav">
-                        <button class="case-close-btn" onclick="closeCase(this, event)">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                            Close
-                        </button>
-                        <span class="case-counter">1 / 5</span>
-                    </div>
                     <div class="case-track">
                         <div class="case-card" style="background:#2A3F52">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">01 — Problem</span>
                                 <h5 class="case-title">Language at Risk</h5>
                                 <p class="case-subtitle">Why this matters</p>
@@ -585,7 +529,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#335166">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">02 — Research</span>
                                 <h5 class="case-title">Deep Ethnography</h5>
                                 <p class="case-subtitle">Fieldwork & discovery</p>
@@ -594,7 +538,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#3D637A">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">03 — Insights</span>
                                 <h5 class="case-title">Key Findings</h5>
                                 <p class="case-subtitle">What the research revealed</p>
@@ -603,7 +547,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#47758E">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">04 — Solution</span>
                                 <h5 class="case-title">Culturally-Grounded Design</h5>
                                 <p class="case-subtitle">Building ARFI</p>
@@ -612,7 +556,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#5187A2">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">05 — Impact</span>
                                 <h5 class="case-title">Launching & Beyond</h5>
                                 <p class="case-subtitle">Where we are now</p>
@@ -719,16 +663,9 @@
                 </div>
 
                 <div class="case-study-view">
-                    <div class="case-nav">
-                        <button class="case-close-btn" onclick="closeCase(this, event)">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                            Close
-                        </button>
-                        <span class="case-counter">1 / 5</span>
-                    </div>
                     <div class="case-track">
                         <div class="case-card" style="background:#4D406E">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">01 — Context</span>
                                 <h5 class="case-title">Brand at a Crossroads</h5>
                                 <p class="case-subtitle">Understanding the landscape</p>
@@ -737,7 +674,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#5D5082">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">02 — Discovery</span>
                                 <h5 class="case-title">Consumer Deep Dive</h5>
                                 <p class="case-subtitle">Focus groups & interviews</p>
@@ -746,7 +683,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#6D6096">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">03 — Analysis</span>
                                 <h5 class="case-title">Building Archetypes</h5>
                                 <p class="case-subtitle">Behavioral & attitudinal mapping</p>
@@ -755,7 +692,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#7D70AA">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">04 — Findings</span>
                                 <h5 class="case-title">Strategic Insights</h5>
                                 <p class="case-subtitle">What emerged from the data</p>
@@ -764,7 +701,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#8D80BE">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">05 — Recommendations</span>
                                 <h5 class="case-title">Actionable Strategy</h5>
                                 <p class="case-subtitle">Positioning for growth</p>
@@ -869,16 +806,9 @@
                 </div>
 
                 <div class="case-study-view">
-                    <div class="case-nav">
-                        <button class="case-close-btn" onclick="closeCase(this, event)">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                            Close
-                        </button>
-                        <span class="case-counter">1 / 5</span>
-                    </div>
                     <div class="case-track">
                         <div class="case-card" style="background:#5E2D2D">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">01 — Opportunity</span>
                                 <h5 class="case-title">Identifying the Gap</h5>
                                 <p class="case-subtitle">Market exploration</p>
@@ -887,7 +817,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#723C3C">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">02 — Validation</span>
                                 <h5 class="case-title">Testing Assumptions</h5>
                                 <p class="case-subtitle">Research & competitive analysis</p>
@@ -896,7 +826,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#864B4B">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">03 — Design</span>
                                 <h5 class="case-title">Rapid Prototyping</h5>
                                 <p class="case-subtitle">Design sprint methodology</p>
@@ -905,7 +835,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#9A5A5A">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">04 — Prototype</span>
                                 <h5 class="case-title">Building the MVP</h5>
                                 <p class="case-subtitle">From concept to code</p>
@@ -914,7 +844,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#AE6969">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">05 — Next Steps</span>
                                 <h5 class="case-title">Preparing for Launch</h5>
                                 <p class="case-subtitle">What's ahead</p>
@@ -1021,16 +951,9 @@
                 </div>
 
                 <div class="case-study-view">
-                    <div class="case-nav">
-                        <button class="case-close-btn" onclick="closeCase(this, event)">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                            Close
-                        </button>
-                        <span class="case-counter">1 / 5</span>
-                    </div>
                     <div class="case-track">
                         <div class="case-card" style="background:#3E4D3B">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">01 — Context</span>
                                 <h5 class="case-title">Education Without Borders</h5>
                                 <p class="case-subtitle">The challenge</p>
@@ -1039,7 +962,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#4A5E47">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">02 — Discovery</span>
                                 <h5 class="case-title">Understanding Learners</h5>
                                 <p class="case-subtitle">User research</p>
@@ -1048,7 +971,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#566F53">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">03 — Design</span>
                                 <h5 class="case-title">Collaborative Experience</h5>
                                 <p class="case-subtitle">Redesigning the platform</p>
@@ -1057,7 +980,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#62805F">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">04 — Testing</span>
                                 <h5 class="case-title">Iterative Refinement</h5>
                                 <p class="case-subtitle">Prototype testing</p>
@@ -1066,7 +989,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#6E916B">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">05 — Outcome</span>
                                 <h5 class="case-title">Measurable Impact</h5>
                                 <p class="case-subtitle">Results & next steps</p>
@@ -1171,16 +1094,9 @@
                 </div>
 
                 <div class="case-study-view">
-                    <div class="case-nav">
-                        <button class="case-close-btn" onclick="closeCase(this, event)">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                            Close
-                        </button>
-                        <span class="case-counter">1 / 5</span>
-                    </div>
                     <div class="case-track">
                         <div class="case-card" style="background:#3C3C3E">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">01 — Mission</span>
                                 <h5 class="case-title">Operations at Scale</h5>
                                 <p class="case-subtitle">The organizational challenge</p>
@@ -1189,7 +1105,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#4C4C4E">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">02 — Assessment</span>
                                 <h5 class="case-title">Mapping the System</h5>
                                 <p class="case-subtitle">Organizational research</p>
@@ -1198,7 +1114,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#5C5C5E">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">03 — Strategy</span>
                                 <h5 class="case-title">Designing the Framework</h5>
                                 <p class="case-subtitle">Process optimization</p>
@@ -1207,7 +1123,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#6C6C6E">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">04 — Implementation</span>
                                 <h5 class="case-title">Rolling Out Change</h5>
                                 <p class="case-subtitle">Phased deployment</p>
@@ -1216,7 +1132,7 @@
                             </div>
                         </div>
                         <div class="case-card" style="background:#7C7C7E">
-                            <div class="case-card-inner">
+                            <div>
                                 <span class="case-label">05 — Impact</span>
                                 <h5 class="case-title">Scaling for Impact</h5>
                                 <p class="case-subtitle">Measurable outcomes</p>
@@ -1384,19 +1300,18 @@
             });
         });
 
-        // Case study track dot + counter indicators
+        // Case study track dot indicators
         document.querySelectorAll('.case-track').forEach(track => {
             const caseView = track.closest('.case-study-view');
             const dots = caseView.querySelectorAll('.case-dots .dot');
-            const counter = caseView.querySelector('.case-counter');
-            const total = track.querySelectorAll('.case-card').length;
 
             track.addEventListener('scroll', () => {
                 const scrollLeft = track.scrollLeft;
-                const cardWidth = track.querySelector('.case-card').offsetWidth;
+                const firstCard = track.querySelector('.case-card');
+                if (!firstCard) return;
+                const cardWidth = firstCard.offsetWidth + 12;
                 const idx = Math.round(scrollLeft / cardWidth);
                 dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-                if (counter) counter.textContent = (idx + 1) + ' / ' + total;
             });
         });
 
@@ -1404,29 +1319,7 @@
             e.stopPropagation();
             const card = btn.closest('.wallet-card');
             const caseView = card.querySelector('.case-study-view');
-
-            overlay.classList.add('active');
-            setTimeout(() => {
-                caseView.classList.add('visible');
-                setTimeout(() => { overlay.classList.remove('active'); }, 50);
-            }, 300);
-        }
-
-        function closeCase(btn, e) {
-            e.stopPropagation();
-            const caseView = btn.closest('.case-study-view');
-
-            overlay.classList.add('active');
-            setTimeout(() => {
-                caseView.classList.remove('visible');
-                const caseTrack = caseView.querySelector('.case-track');
-                if (caseTrack) caseTrack.scrollLeft = 0;
-                const caseDots = caseView.querySelectorAll('.case-dots .dot');
-                caseDots.forEach((d, i) => d.classList.toggle('active', i === 0));
-                const counter = caseView.querySelector('.case-counter');
-                if (counter) counter.textContent = '1 / 5';
-                setTimeout(() => { overlay.classList.remove('active'); }, 50);
-            }, 300);
+            caseView.classList.toggle('visible');
         }
     </script>
 </body>
