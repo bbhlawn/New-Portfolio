@@ -768,6 +768,7 @@
             });
 
             element.classList.add('active');
+            element.style.marginTop = '0';
 
             header.style.display = 'none';
             title.style.display = 'none';
@@ -776,10 +777,10 @@
             achievements.style.display = 'none';
 
             container.style.paddingTop = '0';
-            container.style.paddingBottom = '0';
+            container.style.paddingBottom = '24px';
             container.style.minHeight = '0';
             stack.style.marginBottom = '0';
-            stack.style.paddingTop = '60px';
+            stack.style.paddingTop = '88px';
             stack.style.transform = 'none';
 
             backBtn.classList.add('visible');
@@ -802,6 +803,7 @@
                 card.classList.remove('active');
                 card.classList.remove('inactive');
                 card.style.display = '';
+                card.style.marginTop = '';
             });
 
             header.style.display = '';
