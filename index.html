@@ -293,7 +293,7 @@
 
     <div class="max-w-md mx-auto px-6 pt-12 pb-24 relative min-h-screen">
         <!-- Back Button -->
-        <button id="back-btn" class="back-button fixed top-12 left-6 z-[110] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm text-black font-medium text-sm flex items-center space-x-1" onclick="resetCards()">
+        <button id="back-btn" class="back-button absolute top-6 left-6 z-[110] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm text-black font-medium text-sm flex items-center space-x-1" onclick="resetCards()">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             <span>Back</span>
         </button>
@@ -928,7 +928,7 @@
                 container.style.paddingBottom = '24px';
                 container.style.minHeight = '0';
                 stack.style.marginBottom = '0';
-                stack.style.paddingTop = '88px';
+                stack.style.paddingTop = '64px';
                 stack.style.transform = 'none';
 
                 backBtn.classList.add('visible');
