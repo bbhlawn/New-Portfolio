@@ -52,12 +52,14 @@
         }
         .back-btn:active { background: rgba(0,0,0,0.1); }
 
-        .case-counter {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: rgba(0,0,0,0.3);
-            letter-spacing: 0.05em;
+        .swipe-hint {
+            font-size: 12px;
+            color: rgba(0,0,0,0.25);
+            letter-spacing: 0.02em;
+            font-weight: 400;
+            transition: opacity 0.4s ease;
         }
+        .swipe-hint.hidden { opacity: 0; }
 
         .stack-area {
             flex: 1;
@@ -165,7 +167,7 @@
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 Back
             </a>
-            <span class="case-counter" id="counter">1 / 5</span>
+            <span class="swipe-hint" id="swipe-hint">Swipe to Reveal</span>
         </div>
 
         <div class="stack-area">
@@ -178,7 +180,7 @@
     <script>
         const projects = {
             arfi: {
-                colors: ['#2A3F52','#335166','#3D637A','#47758E','#5187A2'],
+                colors: ['#5187A2','#47758E','#3D637A','#335166','#2A3F52'],
                 steps: [
                     { label: '01 — Problem', title: 'Language at Risk', subtitle: 'Why this matters', body: 'The Chin diaspora is losing its native languages at an alarming rate. Children raised abroad often cannot communicate with grandparents back home. Existing language apps don\'t serve minority languages with small speaker populations — leaving communities without digital tools to preserve their heritage.', highlight: '50+ endangered Chin languages with no digital learning resources' },
                     { label: '02 — Research', title: 'Deep Ethnography', subtitle: 'Fieldwork & discovery', body: 'Conducted ethnographic research across Chin communities in the US, interviewing families, elders, and youth. Mapped language transmission patterns, identified where breakdown occurs, and uncovered cultural practices that naturally support learning — like storytelling and communal singing.', highlight: '30+ interviews across 4 US cities over 6 months' },
@@ -188,7 +190,7 @@
                 ]
             },
             belif: {
-                colors: ['#4D406E','#5D5082','#6D6096','#7D70AA','#8D80BE'],
+                colors: ['#8D80BE','#7D70AA','#6D6096','#5D5082','#4D406E'],
                 steps: [
                     { label: '01 — Context', title: 'Brand at a Crossroads', subtitle: 'Understanding the landscape', body: 'Belif, a Korean skincare brand under LG H&H, was looking to strengthen its positioning in an increasingly crowded K-beauty market. Despite strong product quality and heritage ingredients, the brand\'s identity wasn\'t resonating with younger consumers who were drawn to newer, trendier competitors.', highlight: 'K-beauty market projected at $13.9B by 2027' },
                     { label: '02 — Discovery', title: 'Consumer Deep Dive', subtitle: 'Focus groups & interviews', body: 'Conducted extensive consumer research including focus groups and in-depth interviews to understand how consumers perceive Belif relative to competitors. Explored purchase drivers, brand associations, and unmet needs across different consumer segments to uncover positioning opportunities.', highlight: '8 focus groups across 3 consumer segments' },
@@ -198,7 +200,7 @@
                 ]
             },
             stealth: {
-                colors: ['#5E2D2D','#723C3C','#864B4B','#9A5A5A','#AE6969'],
+                colors: ['#AE6969','#9A5A5A','#864B4B','#723C3C','#5E2D2D'],
                 steps: [
                     { label: '01 — Opportunity', title: 'Identifying the Gap', subtitle: 'Market exploration', body: 'Identified an underserved segment in the fintech space where existing solutions fail to address the needs of emerging-market users. Through preliminary market research and conversations with potential users, validated a problem space with significant growth potential and low competition.', highlight: 'Target market of 200M+ underserved users globally' },
                     { label: '02 — Validation', title: 'Testing Assumptions', subtitle: 'Research & competitive analysis', body: 'Conducted structured market validation through competitive analysis, user interviews, and demand testing. Built lightweight landing pages and ran experiments to test willingness to pay and feature priorities. Results confirmed strong demand for a simplified, trust-centric product experience.', highlight: '78% of surveyed users expressed willingness to switch' },
@@ -208,7 +210,7 @@
                 ]
             },
             duara: {
-                colors: ['#3E4D3B','#4A5E47','#566F53','#62805F','#6E916B'],
+                colors: ['#6E916B','#62805F','#566F53','#4A5E47','#3E4D3B'],
                 steps: [
                     { label: '01 — Context', title: 'Education Without Borders', subtitle: 'The challenge', body: 'Duara is an education platform connecting learners across borders. The challenge was to design an experience that bridges cultural and linguistic differences, making cross-cultural learning feel natural rather than forced. The existing product was functional but lacked the warmth and engagement to retain users beyond initial curiosity.', highlight: 'Users from 12+ countries with 8 primary languages' },
                     { label: '02 — Discovery', title: 'Understanding Learners', subtitle: 'User research', body: 'Conducted user research with both learners and educators across multiple countries. Identified that the biggest drop-off happened when learners felt isolated — when the experience shifted from communal to individual. Discovered that storytelling and shared projects were the most powerful engagement drivers.', highlight: 'Communal learning 3x more engaging than solo modules' },
@@ -218,7 +220,7 @@
                 ]
             },
             global: {
-                colors: ['#3C3C3E','#4C4C4E','#5C5C5E','#6C6C6E','#7C7C7E'],
+                colors: ['#7C7C7E','#6C6C6E','#5C5C5E','#4C4C4E','#3C3C3E'],
                 steps: [
                     { label: '01 — Mission', title: 'Operations at Scale', subtitle: 'The organizational challenge', body: 'An international NGO needed to modernize how it coordinates operations across multiple countries. Information silos, inconsistent processes, and limited visibility into field activities were creating bottlenecks that slowed response times and reduced the impact of programs on the ground.', highlight: 'Operations spanning 15+ countries across 3 continents' },
                     { label: '02 — Assessment', title: 'Mapping the System', subtitle: 'Organizational research', body: 'Conducted a comprehensive operational assessment by interviewing staff at headquarters and in the field. Mapped existing workflows, communication channels, and decision-making processes. Identified critical pain points where information loss and delays had the greatest impact on program delivery.', highlight: '40+ stakeholder interviews across 8 country offices' },
@@ -240,7 +242,7 @@
 
         const stackEl = document.getElementById('stack');
         const dotsContainer = document.getElementById('dots');
-        const counter = document.getElementById('counter');
+        const swipeHint = document.getElementById('swipe-hint');
         const total = project.steps.length;
         let currentIndex = 0;
 
@@ -262,6 +264,7 @@
         const dots = dotsContainer.querySelectorAll('.dot');
 
         function layoutStack() {
+            const isLast = currentIndex >= total - 1;
             cards.forEach((card, i) => {
                 const offset = i - currentIndex;
                 if (offset < 0) {
@@ -275,24 +278,29 @@
                     card.style.pointerEvents = 'auto';
                     card.style.zIndex = total - offset;
                 } else if (offset === 1) {
-                    card.style.transform = 'scale(0.95) translateY(12px) rotate(2deg)';
-                    card.style.opacity = '0.7';
+                    card.style.transform = 'scale(0.93) translateY(18px) rotate(2.5deg)';
+                    card.style.opacity = '0.6';
                     card.style.pointerEvents = 'none';
                     card.style.zIndex = total - offset;
                 } else if (offset === 2) {
-                    card.style.transform = 'scale(0.9) translateY(24px) rotate(-1.5deg)';
-                    card.style.opacity = '0.4';
+                    card.style.transform = 'scale(0.86) translateY(36px) rotate(-2deg)';
+                    card.style.opacity = '0.35';
+                    card.style.pointerEvents = 'none';
+                    card.style.zIndex = total - offset;
+                } else if (offset === 3) {
+                    card.style.transform = 'scale(0.79) translateY(52px) rotate(1.5deg)';
+                    card.style.opacity = '0.15';
                     card.style.pointerEvents = 'none';
                     card.style.zIndex = total - offset;
                 } else {
-                    card.style.transform = 'scale(0.85) translateY(36px)';
+                    card.style.transform = 'scale(0.75) translateY(60px)';
                     card.style.opacity = '0';
                     card.style.pointerEvents = 'none';
                     card.style.zIndex = 0;
                 }
             });
             dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
-            counter.textContent = (currentIndex + 1) + ' / ' + total;
+            swipeHint.classList.toggle('hidden', isLast);
         }
 
         layoutStack();
@@ -300,7 +308,7 @@
         let startX = 0, startY = 0, deltaX = 0, isDragging = false, isHorizontal = null;
 
         function onStart(e) {
-            if (currentIndex >= total) return;
+            if (currentIndex >= total - 1) return;
             const pt = e.touches ? e.touches[0] : e;
             startX = pt.clientX;
             startY = pt.clientY;
@@ -337,11 +345,11 @@
             const progress = Math.min(Math.abs(deltaX) / 200, 1);
             if (currentIndex + 1 < total) {
                 const next = cards[currentIndex + 1];
-                const s = 0.95 + progress * 0.05;
-                const ty = 12 - progress * 12;
-                const r = 2 - progress * 2;
+                const s = 0.93 + progress * 0.07;
+                const ty = 18 - progress * 18;
+                const r = 2.5 - progress * 2.5;
                 next.style.transform = `scale(${s}) translateY(${ty}px) rotate(${r}deg)`;
-                next.style.opacity = String(0.7 + progress * 0.3);
+                next.style.opacity = String(0.6 + progress * 0.4);
             }
         }
 
