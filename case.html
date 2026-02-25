@@ -21,6 +21,8 @@
             display: flex;
             flex-direction: column;
             min-height: 100dvh;
+            max-width: 448px;
+            margin: 0 auto;
         }
 
         .case-header {
@@ -68,7 +70,7 @@
         .case-track::-webkit-scrollbar { display: none; }
 
         .case-card {
-            flex: 0 0 85%;
+            flex: 0 0 calc(100% - 48px);
             scroll-snap-align: start;
             border-radius: 20px;
             padding: 28px 24px;

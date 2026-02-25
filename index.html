@@ -973,7 +973,8 @@
             const stack = document.getElementById('card-stack');
             const container = stack.parentElement;
             const workExp = document.getElementById('work-experience');
-            const teaching = document.getElementById('teaching-leadership');
+            const teaching = document.getElementById('teaching');
+            const leadership = document.getElementById('leadership');
             const achievements = document.getElementById('lifelong-achievements');
 
             if (element.classList.contains('active')) return;
@@ -995,7 +996,8 @@
                 header.style.display = 'none';
                 title.style.display = 'none';
                 workExp.style.display = 'none';
-                teaching.style.display = 'none';
+                if (teaching) teaching.style.display = 'none';
+                if (leadership) leadership.style.display = 'none';
                 achievements.style.display = 'none';
 
                 container.style.paddingTop = '0';
@@ -1023,7 +1025,8 @@
             const stack = document.getElementById('card-stack');
             const container = stack.parentElement;
             const workExp = document.getElementById('work-experience');
-            const teaching = document.getElementById('teaching-leadership');
+            const teaching = document.getElementById('teaching');
+            const leadership = document.getElementById('leadership');
             const achievements = document.getElementById('lifelong-achievements');
 
             overlay.classList.add('active');
@@ -1039,7 +1042,8 @@
                 header.style.display = '';
                 title.style.display = '';
                 workExp.style.display = '';
-                teaching.style.display = '';
+                if (teaching) teaching.style.display = '';
+                if (leadership) leadership.style.display = '';
                 achievements.style.display = '';
 
                 container.style.paddingTop = '';
