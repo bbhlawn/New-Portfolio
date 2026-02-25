@@ -11,41 +11,35 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            overflow: hidden;
+            background-color: #f2f2f7;
             -webkit-tap-highlight-color: transparent;
             font-weight: 300;
             letter-spacing: -0.01em;
             height: 100dvh;
+            overflow: hidden;
         }
 
         .case-shell {
             display: flex;
             flex-direction: column;
             height: 100dvh;
-            color: white;
         }
 
         .case-header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 10;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 16px 24px;
+            flex-shrink: 0;
         }
 
         .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.06);
-            color: white;
+            background: rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.04);
+            color: #333;
             padding: 8px 16px;
             border-radius: 999px;
             font-size: 13px;
@@ -54,40 +48,40 @@
             transition: background 0.2s;
             text-decoration: none;
         }
-        .back-btn:active { background: rgba(255,255,255,0.18); }
+        .back-btn:active { background: rgba(0,0,0,0.1); }
+        .back-btn svg { color: #333; }
 
         .case-counter {
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(0,0,0,0.3);
             letter-spacing: 0.05em;
         }
 
         .case-track {
             flex: 1;
             display: flex;
+            gap: 16px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            padding: 8px 24px 0;
+            align-items: center;
         }
         .case-track::-webkit-scrollbar { display: none; }
 
         .case-card {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
+            flex: 0 0 calc(100% - 48px);
+            scroll-snap-align: center;
+            border-radius: 24px;
+            padding: 32px 28px;
+            min-height: 420px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 80px 32px 72px;
-            min-height: 100%;
+            justify-content: space-between;
+            color: white;
             box-sizing: border-box;
-        }
-
-        .case-inner {
-            max-width: 400px;
-            margin: 0 auto;
-            width: 100%;
         }
 
         .case-label {
@@ -99,7 +93,7 @@
             text-transform: uppercase;
         }
         .case-title {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 500;
             letter-spacing: -0.02em;
             margin: 14px 0 8px;
@@ -108,16 +102,16 @@
             font-size: 13px;
             font-weight: 400;
             opacity: 0.4;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
         .case-body {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 300;
             opacity: 0.8;
-            line-height: 1.75;
+            line-height: 1.7;
         }
         .case-highlight {
-            margin-top: 32px;
+            margin-top: 28px;
             padding-top: 16px;
             border-top: 1px solid rgba(255,255,255,0.08);
             font-size: 12px;
@@ -127,32 +121,28 @@
         }
 
         .case-dots {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             display: flex;
             justify-content: center;
             gap: 6px;
-            padding: 20px 0 28px;
-            z-index: 10;
+            padding: 20px 0 32px;
+            flex-shrink: 0;
         }
         .case-dots .dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.12);
             transition: all 0.3s ease;
         }
         .case-dots .dot.active {
-            background: rgba(255,255,255,0.7);
+            background: rgba(0,0,0,0.4);
             width: 18px;
             border-radius: 3px;
         }
     </style>
 </head>
 <body>
-    <div class="case-shell" id="case-shell">
+    <div class="case-shell">
         <div class="case-header">
             <a class="back-btn" id="back-btn" href="index.html">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
@@ -240,7 +230,7 @@
             const card = document.createElement('div');
             card.className = 'case-card';
             card.style.background = project.colors[i];
-            card.innerHTML = `<div class="case-inner"><span class="case-label">${step.label}</span><h2 class="case-title">${step.title}</h2><p class="case-subtitle">${step.subtitle}</p><p class="case-body">${step.body}</p><p class="case-highlight">${step.highlight}</p></div>`;
+            card.innerHTML = `<div><span class="case-label">${step.label}</span><h2 class="case-title">${step.title}</h2><p class="case-subtitle">${step.subtitle}</p><p class="case-body">${step.body}</p></div><p class="case-highlight">${step.highlight}</p>`;
             track.appendChild(card);
 
             const dot = document.createElement('span');
@@ -251,7 +241,9 @@
         const dots = dotsContainer.querySelectorAll('.dot');
 
         track.addEventListener('scroll', () => {
-            const cardWidth = track.querySelector('.case-card').offsetWidth;
+            const firstCard = track.querySelector('.case-card');
+            if (!firstCard) return;
+            const cardWidth = firstCard.offsetWidth + 16;
             const idx = Math.round(track.scrollLeft / cardWidth);
             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
             counter.textContent = (idx + 1) + ' / ' + total;
