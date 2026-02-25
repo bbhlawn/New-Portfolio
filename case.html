@@ -61,22 +61,21 @@
         .case-track {
             flex: 1;
             display: flex;
-            gap: 16px;
+            gap: 12px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            padding: 8px 24px 0;
+            padding: 0 24px;
             align-items: center;
         }
         .case-track::-webkit-scrollbar { display: none; }
 
         .case-card {
-            flex: 0 0 calc(100% - 48px);
-            scroll-snap-align: center;
-            border-radius: 24px;
-            padding: 32px 28px;
-            min-height: 420px;
+            flex: 0 0 85%;
+            scroll-snap-align: start;
+            border-radius: 20px;
+            padding: 28px 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -243,7 +242,7 @@
         track.addEventListener('scroll', () => {
             const firstCard = track.querySelector('.case-card');
             if (!firstCard) return;
-            const cardWidth = firstCard.offsetWidth + 16;
+            const cardWidth = firstCard.offsetWidth + 12;
             const idx = Math.round(track.scrollLeft / cardWidth);
             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
             counter.textContent = (idx + 1) + ' / ' + total;
