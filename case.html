@@ -15,12 +15,14 @@
             -webkit-tap-highlight-color: transparent;
             font-weight: 300;
             letter-spacing: -0.01em;
+            overflow: hidden;
+            height: 100dvh;
         }
 
         .case-shell {
             display: flex;
             flex-direction: column;
-            min-height: 100dvh;
+            height: 100dvh;
             max-width: 448px;
             margin: 0 auto;
         }
@@ -49,7 +51,6 @@
             text-decoration: none;
         }
         .back-btn:active { background: rgba(0,0,0,0.1); }
-        .back-btn svg { color: #333; }
 
         .case-counter {
             font-family: 'JetBrains Mono', monospace;
@@ -58,26 +59,46 @@
             letter-spacing: 0.05em;
         }
 
-        .case-track {
+        .stack-area {
+            flex: 1;
+            position: relative;
+            padding: 8px 24px 0;
             display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding: 0 24px;
+            align-items: flex-start;
+            justify-content: center;
         }
-        .case-track::-webkit-scrollbar { display: none; }
+
+        .card-stack {
+            position: relative;
+            width: 100%;
+            height: 480px;
+        }
 
         .case-card {
-            flex: 0 0 calc(100% - 48px);
-            scroll-snap-align: start;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 20px;
-            padding: 28px 24px;
+            padding: 32px 28px;
             display: flex;
             flex-direction: column;
             color: white;
             box-sizing: border-box;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y;
+            will-change: transform;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .case-card:active { cursor: grabbing; }
+        .case-card.swiping { transition: none; }
+        .case-card.dismissed {
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.3s ease;
         }
 
         .case-label {
@@ -105,7 +126,6 @@
             font-weight: 300;
             opacity: 0.8;
             line-height: 1.7;
-            margin-bottom: 16px;
         }
         .case-highlight {
             margin-top: auto;
@@ -121,7 +141,7 @@
             display: flex;
             justify-content: center;
             gap: 6px;
-            padding: 20px 0 32px;
+            padding: 24px 0 32px;
             flex-shrink: 0;
         }
         .case-dots .dot {
@@ -148,7 +168,9 @@
             <span class="case-counter" id="counter">1 / 5</span>
         </div>
 
-        <div class="case-track" id="track"></div>
+        <div class="stack-area">
+            <div class="card-stack" id="stack"></div>
+        </div>
 
         <div class="case-dots" id="dots"></div>
     </div>
@@ -212,23 +234,25 @@
         const from = params.get('from') || 'index.html';
         const project = projects[projectKey];
 
-        if (!project) {
-            window.location.href = from;
-        }
+        if (!project) { window.location.href = from; }
 
         document.getElementById('back-btn').href = from;
 
-        const track = document.getElementById('track');
+        const stackEl = document.getElementById('stack');
         const dotsContainer = document.getElementById('dots');
         const counter = document.getElementById('counter');
         const total = project.steps.length;
+        let currentIndex = 0;
+
+        const cards = [];
 
         project.steps.forEach((step, i) => {
             const card = document.createElement('div');
             card.className = 'case-card';
             card.style.background = project.colors[i];
             card.innerHTML = `<div><span class="case-label">${step.label}</span><h2 class="case-title">${step.title}</h2><p class="case-subtitle">${step.subtitle}</p><p class="case-body">${step.body}</p></div><p class="case-highlight">${step.highlight}</p>`;
-            track.appendChild(card);
+            stackEl.appendChild(card);
+            cards.push(card);
 
             const dot = document.createElement('span');
             dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -237,14 +261,119 @@
 
         const dots = dotsContainer.querySelectorAll('.dot');
 
-        track.addEventListener('scroll', () => {
-            const firstCard = track.querySelector('.case-card');
-            if (!firstCard) return;
-            const cardWidth = firstCard.offsetWidth + 12;
-            const idx = Math.round(track.scrollLeft / cardWidth);
-            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-            counter.textContent = (idx + 1) + ' / ' + total;
-        });
+        function layoutStack() {
+            cards.forEach((card, i) => {
+                const offset = i - currentIndex;
+                if (offset < 0) {
+                    card.style.transform = 'translateX(-120%) rotate(-8deg)';
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                    card.style.zIndex = 0;
+                } else if (offset === 0) {
+                    card.style.transform = 'translateX(0) rotate(0deg)';
+                    card.style.opacity = '1';
+                    card.style.pointerEvents = 'auto';
+                    card.style.zIndex = total - offset;
+                } else if (offset === 1) {
+                    card.style.transform = 'scale(0.95) translateY(12px) rotate(2deg)';
+                    card.style.opacity = '0.7';
+                    card.style.pointerEvents = 'none';
+                    card.style.zIndex = total - offset;
+                } else if (offset === 2) {
+                    card.style.transform = 'scale(0.9) translateY(24px) rotate(-1.5deg)';
+                    card.style.opacity = '0.4';
+                    card.style.pointerEvents = 'none';
+                    card.style.zIndex = total - offset;
+                } else {
+                    card.style.transform = 'scale(0.85) translateY(36px)';
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                    card.style.zIndex = 0;
+                }
+            });
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+            counter.textContent = (currentIndex + 1) + ' / ' + total;
+        }
+
+        layoutStack();
+
+        let startX = 0, startY = 0, deltaX = 0, isDragging = false, isHorizontal = null;
+
+        function onStart(e) {
+            if (currentIndex >= total) return;
+            const pt = e.touches ? e.touches[0] : e;
+            startX = pt.clientX;
+            startY = pt.clientY;
+            deltaX = 0;
+            isDragging = true;
+            isHorizontal = null;
+            cards[currentIndex].classList.add('swiping');
+        }
+
+        function onMove(e) {
+            if (!isDragging) return;
+            const pt = e.touches ? e.touches[0] : e;
+            const dx = pt.clientX - startX;
+            const dy = pt.clientY - startY;
+
+            if (isHorizontal === null) {
+                if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+                    isHorizontal = Math.abs(dx) > Math.abs(dy);
+                    if (!isHorizontal) {
+                        isDragging = false;
+                        cards[currentIndex].classList.remove('swiping');
+                        return;
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            if (e.cancelable) e.preventDefault();
+            deltaX = dx;
+            const rotate = deltaX * 0.04;
+            cards[currentIndex].style.transform = `translateX(${deltaX}px) rotate(${rotate}deg)`;
+
+            const progress = Math.min(Math.abs(deltaX) / 200, 1);
+            if (currentIndex + 1 < total) {
+                const next = cards[currentIndex + 1];
+                const s = 0.95 + progress * 0.05;
+                const ty = 12 - progress * 12;
+                const r = 2 - progress * 2;
+                next.style.transform = `scale(${s}) translateY(${ty}px) rotate(${r}deg)`;
+                next.style.opacity = String(0.7 + progress * 0.3);
+            }
+        }
+
+        function onEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            const card = cards[currentIndex];
+            card.classList.remove('swiping');
+
+            if (Math.abs(deltaX) > 80) {
+                const dir = deltaX > 0 ? 1 : -1;
+                card.classList.add('dismissed');
+                card.style.transform = `translateX(${dir * 500}px) rotate(${dir * 20}deg)`;
+                card.style.opacity = '0';
+                card.style.pointerEvents = 'none';
+
+                currentIndex++;
+                setTimeout(() => {
+                    card.classList.remove('dismissed');
+                    layoutStack();
+                }, 350);
+            } else {
+                layoutStack();
+            }
+        }
+
+        stackEl.addEventListener('touchstart', onStart, { passive: true });
+        stackEl.addEventListener('touchmove', onMove, { passive: false });
+        stackEl.addEventListener('touchend', onEnd);
+        stackEl.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
     </script>
 </body>
 </html>
